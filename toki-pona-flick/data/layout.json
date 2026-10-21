@@ -1,0 +1,368 @@
+[
+ [
+  {
+   "g": "Pronouns",
+   "w": [
+    "ni",
+    "ona",
+    "sina",
+    "jan",
+    "mi"
+   ]
+  },
+  {
+   "g": "Grammar",
+   "w": [
+    "li",
+    "la",
+    "o",
+    "e",
+    "pi"
+   ]
+  },
+  {
+   "g": "Prepositions",
+   "w": [
+    "lon",
+    "tan",
+    "sama",
+    "tawa",
+    "kepeken"
+   ]
+  },
+  {
+   "g": "Negation & logic",
+   "w": [
+    "ala",
+    "anu",
+    "seme",
+    "taso",
+    "en"
+   ]
+  },
+  {
+   "g": "Qualities",
+   "w": [
+    "wawa",
+    "lili",
+    "pona",
+    "suli",
+    "ike"
+   ]
+  },
+  {
+   "g": "Mind & will",
+   "w": [
+    "wile",
+    "ken",
+    "kama",
+    "sona",
+    "pilin"
+   ]
+  },
+  {
+   "g": "Language",
+   "w": [
+    "toki",
+    "nimi",
+    "sitelen",
+    "lipu",
+    "musi"
+   ]
+  },
+  {
+   "g": "Actions",
+   "w": [
+    "pali",
+    "pana",
+    "jo",
+    "lukin",
+    "ante"
+   ]
+  },
+  {
+   "g": "Numbers",
+   "w": [
+    "mute",
+    "wan",
+    "tu",
+    "ale",
+    "nanpa"
+   ]
+  },
+  {
+   "g": "Time & place",
+   "w": [
+    "tenpo",
+    "ma",
+    "tomo",
+    "nasin",
+    ""
+   ]
+  },
+  {
+   "g": "Things & life",
+   "w": [
+    "ijo",
+    "ilo",
+    "moku",
+    "lape",
+    ""
+   ]
+  },
+  {
+   "g": "Interjections",
+   "w": [
+    "a",
+    "n",
+    "mu",
+    "kin",
+    ""
+   ]
+  }
+ ],
+ [
+  {
+   "g": "Animals",
+   "w": [
+    "soweli",
+    "kala",
+    "waso",
+    "pipi",
+    "akesi"
+   ]
+  },
+  {
+   "g": "Plants & food",
+   "w": [
+    "kasi",
+    "kili",
+    "pan",
+    "soko",
+    "kijetesantakalu"
+   ]
+  },
+  {
+   "g": "Sky & light",
+   "w": [
+    "suno",
+    "mun",
+    "sewi",
+    "pimeja",
+    ""
+   ]
+  },
+  {
+   "g": "Matter",
+   "w": [
+    "telo",
+    "ko",
+    "kon",
+    "kiwen",
+    ""
+   ]
+  },
+  {
+   "g": "Colors",
+   "w": [
+    "kule",
+    "loje",
+    "jelo",
+    "laso",
+    "walo"
+   ]
+  },
+  {
+   "g": "Body",
+   "w": [
+    "sijelo",
+    "uta",
+    "lawa",
+    "luka",
+    "noka"
+   ]
+  },
+  {
+   "g": "People",
+   "w": [
+    "kulupu",
+    "mama",
+    "meli",
+    "mije",
+    "tonsi"
+   ]
+  },
+  {
+   "g": "Feelings",
+   "w": [
+    "olin",
+    "suwi",
+    "monsuta",
+    "jaki",
+    "nasa"
+   ]
+  },
+  {
+   "g": "Surfaces & holes",
+   "w": [
+    "selo",
+    "",
+    "nena",
+    "",
+    "lupa"
+   ]
+  },
+  {
+   "g": "Sound",
+   "w": [
+    "kalama",
+    "kute",
+    "",
+    "",
+    ""
+   ]
+  },
+  {
+   "g": "Life & death",
+   "w": [
+    "unpa",
+    "moli",
+    "misikeke",
+    "",
+    ""
+   ]
+  },
+  {
+   "g": "Heat",
+   "w": [
+    "seli",
+    "",
+    "",
+    "",
+    "lete"
+   ]
+  }
+ ],
+ [
+  {
+   "g": "Position",
+   "w": [
+    "insa",
+    "monsi",
+    "poka",
+    "sinpin",
+    "anpa"
+   ]
+  },
+  {
+   "g": "Box, open & close",
+   "w": [
+    "poki",
+    "open",
+    "awen",
+    "pini",
+    "weka"
+   ]
+  },
+  {
+   "g": "Conflict",
+   "w": [
+    "utala",
+    "alasa",
+    "pakala",
+    "kipisi",
+    ""
+   ]
+  },
+  {
+   "g": "Objects",
+   "w": [
+    "len",
+    "palisa",
+    "",
+    "supa",
+    ""
+   ]
+  },
+  {
+   "g": "Shapes",
+   "w": [
+    "sike",
+    "leko",
+    "linja",
+    "",
+    ""
+   ]
+  },
+  {
+   "g": "Money",
+   "w": [
+    "mani",
+    "esun",
+    "",
+    "",
+    ""
+   ]
+  },
+  {
+   "g": "New & extra",
+   "w": [
+    "sin",
+    "namako",
+    "",
+    "",
+    ""
+   ]
+  },
+  {
+   "g": "Books",
+   "w": [
+    "pu",
+    "ku",
+    "",
+    "",
+    ""
+   ]
+  },
+  {
+   "g": "",
+   "w": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ]
+  },
+  {
+   "g": "",
+   "w": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ]
+  },
+  {
+   "g": "",
+   "w": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ]
+  },
+  {
+   "g": "",
+   "w": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ]
+  }
+ ]
+]

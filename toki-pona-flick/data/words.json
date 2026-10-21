@@ -1,0 +1,1312 @@
+[
+ {
+  "word": "li",
+  "rank": 1,
+  "count": 1238778,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1927",
+  "en": "(particle) [marks the start of an indicative verb (statement)]",
+  "ja": "(主語が mi か sina のみである場合を除き、主語と述語の間におく; 同じ主語に対して別の述語を並立する際にも用いる)"
+ },
+ {
+  "word": "mi",
+  "rank": 2,
+  "count": 1153592,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1934",
+  "en": "(pronoun) I, me, we, us",
+  "ja": "わたし、われわれ"
+ },
+ {
+  "word": "e",
+  "rank": 3,
+  "count": 942205,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1909",
+  "en": "(particle) [marks the start of a direct object]",
+  "ja": "(直接目的語の前におく)"
+ },
+ {
+  "word": "a",
+  "rank": 4,
+  "count": 793411,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1900",
+  "en": "(interjection) ah, oh, ha, eh, um, oy; (particle) [placed after something for emphasis or emotion]",
+  "ja": "(強調する、感情をこめる、確認の意をあらわす)"
+ },
+ {
+  "word": "pona",
+  "rank": 5,
+  "count": 696800,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1954",
+  "en": "positive quality, e.g. good, pleasant, helpful, friendly, useful, peaceful",
+  "ja": "よい、好ましい、役立つ; 友好的な、優しい; わかりやすい"
+ },
+ {
+  "word": "toki",
+  "rank": 6,
+  "count": 629318,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F196C",
+  "en": "communicate, say, think; conversation, story; language",
+  "ja": "話す、言う、通信する、会話、言語、考える; やあ！(挨拶)"
+ },
+ {
+  "word": "ni",
+  "rank": 7,
+  "count": 621972,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1941",
+  "en": "this, that, these, those",
+  "ja": "これ、あれ、この、その"
+ },
+ {
+  "word": "la",
+  "rank": 8,
+  "count": 491816,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1921",
+  "en": "(particle) [mark the previous statement as context to the following statement]",
+  "ja": "(particle) [mark the previous statement as context to the following statement]"
+ },
+ {
+  "word": "lon",
+  "rank": 9,
+  "count": 480668,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F192C",
+  "en": "present, existing, real, true; (preposition) located at, in, during, in the context of",
+  "ja": "present, existing, real, true; (preposition) located at, in, during, in the context of"
+ },
+ {
+  "word": "ala",
+  "rank": 10,
+  "count": 433648,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1902",
+  "en": "not, nothing, no; (particle) [negates a word or phrase]; (particle) [forms a yes-no question]; (number) zero",
+  "ja": "存在しない、～でない、零; [~ ala ~] (肯定／否定を問う疑問文をつくる); 無"
+ },
+ {
+  "word": "sina",
+  "rank": 11,
+  "count": 424460,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F195E",
+  "en": "(pronoun) you, y'all",
+  "ja": "あなた、あなたがた"
+ },
+ {
+  "word": "jan",
+  "rank": 12,
+  "count": 400879,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1911",
+  "en": "human being, person, somebody",
+  "ja": "人、人物、だれか"
+ },
+ {
+  "word": "o",
+  "rank": 13,
+  "count": 396994,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1944",
+  "en": "(particle) [marks the end of a vocative (who is being spoken to)], [marks the start of an imperative (command, wish, instruction)], should",
+  "ja": "(呼びかけの声) (述語の前に li の代りにおくことで命令文/意志文をつくる)"
+ },
+ {
+  "word": "tawa",
+  "rank": 14,
+  "count": 367950,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1969",
+  "en": "motion, e.g. walking, shaking, flight, travel; (preposition) to, for, going to, from the perspective of",
+  "ja": "～へ行く、～に向かって、～に対して; ～へ; ～の立場からすると; 移動、動き | ALT (pv.) ～しに行く"
+ },
+ {
+  "word": "pi",
+  "rank": 15,
+  "count": 363590,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F194D",
+  "en": "(particle) [group the following words into one modifier for the previous word]",
+  "ja": "(particle) [group the following words into one modifier for the previous word]"
+ },
+ {
+  "word": "sona",
+  "rank": 16,
+  "count": 296715,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1961",
+  "en": "knowledge, information, data; know, be skilled in, be wise about; (preverb) know how to",
+  "ja": "知っている、技能がある、知識がある、情報、理解; (pv.) ～することを心得ている"
+ },
+ {
+  "word": "ona",
+  "rank": 17,
+  "count": 292678,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1946",
+  "en": "(third-person pronoun) he, she, it, they",
+  "ja": "彼、彼女、彼ら、それ、それら"
+ },
+ {
+  "word": "mute",
+  "rank": 18,
+  "count": 260177,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F193C",
+  "en": "many, several, very; quantity; (number) twenty",
+  "ja": "たくさんの、多い、いくつかの、もっと、とても、非常に; 量 | ALT 三以上、二十"
+ },
+ {
+  "word": "kama",
+  "rank": 19,
+  "count": 246672,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1916",
+  "en": "arriving, coming, future, summoned; (preverb) to become, manage to, succeed in",
+  "ja": "arriving, coming, future, summoned; (preverb) to become, manage to, succeed in"
+ },
+ {
+  "word": "tenpo",
+  "rank": 20,
+  "count": 241390,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F196B",
+  "en": "time, event, situation, moment, period, duration",
+  "ja": "時、時間、期間、瞬間、機会、時期、情勢"
+ },
+ {
+  "word": "ken",
+  "rank": 21,
+  "count": 240581,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1918",
+  "en": "can, may, ability, permission; possibility, maybe; allow, enable; (preverb) to be able to",
+  "ja": "can, may, ability, permission; possibility, maybe; allow, enable; (preverb) to be able to"
+ },
+ {
+  "word": "seme",
+  "rank": 22,
+  "count": 227296,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1959",
+  "en": "(particle) [indicate a question by marking missing info in a sentence]; what, which, who",
+  "ja": "何？　どれ？"
+ },
+ {
+  "word": "wile",
+  "rank": 23,
+  "count": 213866,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1977",
+  "en": "want, desire, wish, require; (preverb) want to",
+  "ja": "～したい、～しなければならない、～の必要がある、～すべきである、求める、望む"
+ },
+ {
+  "word": "taso",
+  "rank": 24,
+  "count": 183277,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1968",
+  "en": "only, exclusively; (particle) [marks a sentence as qualifying or contradictory], but, however",
+  "ja": "しかし、けれども; ～だけ、～のみ"
+ },
+ {
+  "word": "nimi",
+  "rank": 25,
+  "count": 174573,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1942",
+  "en": "word, name",
+  "ja": "名前、言葉、単語"
+ },
+ {
+  "word": "tan",
+  "rank": 26,
+  "count": 152389,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1967",
+  "en": "(preposition) from, because of; cause, origin",
+  "ja": "(preposition) from, because of; cause, origin"
+ },
+ {
+  "word": "pilin",
+  "rank": 27,
+  "count": 150973,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F194E",
+  "en": "experience e.g. emotion, feeling, touch; heart (physical or emotional)",
+  "ja": "experience e.g. emotion, feeling, touch; heart (physical or emotional)"
+ },
+ {
+  "word": "ma",
+  "rank": 28,
+  "count": 148972,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1930",
+  "en": "earth, land, soil; country, territory, world; outdoors",
+  "ja": "土地、陸; 屋外、世界; 国、地域、領域; 土"
+ },
+ {
+  "word": "ale",
+  "rank": 29,
+  "count": 148518,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1904",
+  "en": "all, every, everything, entirety, universe; (number) one hundred",
+  "ja": "all, every, everything, entirety, universe; (number) one hundred"
+ },
+ {
+  "word": "musi",
+  "rank": 30,
+  "count": 143657,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F193B",
+  "en": "fun, game, entertainment, art, play, amusing, interesting, comical, silly",
+  "ja": "楽しい、おもしろい、愉快な、ふざけた、芸術的な、遊戯、娯楽"
+ },
+ {
+  "word": "ike",
+  "rank": 31,
+  "count": 140001,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F190D",
+  "en": "negative quality, e.g. bad, unpleasant, harmful, unneeded",
+  "ja": "悪い、まちがった、不必要な、問題のある、酷い | ALT 複雑な、困難な"
+ },
+ {
+  "word": "lili",
+  "rank": 32,
+  "count": 131947,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1928",
+  "en": "small, short, young; few; piece, part",
+  "ja": "小さい、ちょっとした、短い; 少ない; 些細な; 若い"
+ },
+ {
+  "word": "pali",
+  "rank": 33,
+  "count": 130862,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1949",
+  "en": "work, activity; create, build, design; put effort toward, take action on",
+  "ja": "work, activity; create, build, design; put effort toward, take action on"
+ },
+ {
+  "word": "sitelen",
+  "rank": 34,
+  "count": 130759,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1960",
+  "en": "image, picture, representation, symbol, mark, writing",
+  "ja": "画像、映像、絵、シンボル、記号、文字、描写、書く"
+ },
+ {
+  "word": "kepeken",
+  "rank": 35,
+  "count": 115601,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1919",
+  "en": "(preposition) using, by means of",
+  "ja": "～を使う、～を用いて、～によって"
+ },
+ {
+  "word": "ilo",
+  "rank": 36,
+  "count": 115252,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F190E",
+  "en": "tool, implement, machine, device",
+  "ja": "道具、設備、機械、装置"
+ },
+ {
+  "word": "tomo",
+  "rank": 37,
+  "count": 109077,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F196D",
+  "en": "indoor space or shelter e.g. room, building, home, tent, shack",
+  "ja": "屋内空間; 建物、住宅、家、部屋"
+ },
+ {
+  "word": "lukin",
+  "rank": 38,
+  "count": 107636,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F192E",
+  "en": "see, look, view, examine, read, watch; visual; eye, seeing organ; (preverb) try to",
+  "ja": "see, look, view, examine, read, watch; visual; eye, seeing organ; (preverb) try to"
+ },
+ {
+  "word": "moku",
+  "rank": 39,
+  "count": 103424,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1936",
+  "en": "eat, drink, consume, swallow, ingest; food, edible thing",
+  "ja": "食べる、飲む、摂取する、食べ物、食事"
+ },
+ {
+  "word": "ante",
+  "rank": 40,
+  "count": 101580,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1906",
+  "en": "different, altered; modify, change; other; difference",
+  "ja": "different, altered; modify, change; other; difference"
+ },
+ {
+  "word": "ijo",
+  "rank": 41,
+  "count": 99701,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F190C",
+  "en": "thing, object, entity, being, matter, phenomenon",
+  "ja": "thing, object, entity, being, matter, phenomenon"
+ },
+ {
+  "word": "suli",
+  "rank": 42,
+  "count": 99534,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1963",
+  "en": "big, heavy, large, long, tall, wide; important, relevant",
+  "ja": "大きい、重い、広い、長い、丈のある; 重要な; 大人"
+ },
+ {
+  "word": "mu",
+  "rank": 43,
+  "count": 97362,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1939",
+  "en": "(animal noise or communication, onomatopoeia)",
+  "ja": "(動物の鳴き声) | ALT (言葉にならない声)"
+ },
+ {
+  "word": "sama",
+  "rank": 44,
+  "count": 95031,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1956",
+  "en": "same, similar, alike; peer, fellow, each other; (preposition) similar to, same as",
+  "ja": "same, similar, alike; (adjective) peer, fellow, each other; (preposition) similar to, same as"
+ },
+ {
+  "word": "tu",
+  "rank": 45,
+  "count": 93303,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F196E",
+  "en": "(number) two; separate, divide, split",
+  "ja": "二 | ALT 分ける、切断する"
+ },
+ {
+  "word": "nasin",
+  "rank": 46,
+  "count": 92946,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F193F",
+  "en": "method, doctrine, tradition; path, road, way",
+  "ja": "方法、主義、伝統、習慣; 道、道路、道筋"
+ },
+ {
+  "word": "anu",
+  "rank": 47,
+  "count": 86580,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1907",
+  "en": "(particle) [separates multiple possibilities, replacing another particle], or",
+  "ja": "～または～ | ALT 選択する、決める"
+ },
+ {
+  "word": "pana",
+  "rank": 48,
+  "count": 84435,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F194C",
+  "en": "give, send, emit, provide, put, release",
+  "ja": "与える、送る、発する、授ける、置く、放す"
+ },
+ {
+  "word": "soweli",
+  "rank": 49,
+  "count": 82444,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1962",
+  "en": "fuzzy creature, land animal, beast",
+  "ja": "動物、獣、陸棲哺乳類"
+ },
+ {
+  "word": "jo",
+  "rank": 50,
+  "count": 81432,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1913",
+  "en": "hold, carry, possess, contain, own",
+  "ja": "持つ、有する、含む、携帯する"
+ },
+ {
+  "word": "wan",
+  "rank": 51,
+  "count": 79477,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1973",
+  "en": "(number) one; singular; combine, join, mix, fuse",
+  "ja": "唯一の、単一の、合一した; 一"
+ },
+ {
+  "word": "wawa",
+  "rank": 52,
+  "count": 79084,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1975",
+  "en": "power, energy, strength; confident, intense, forceful; amazing, impressive",
+  "ja": "強い、有力な; 自信がある、信頼できる; 活発な、強烈な、力、エネルギー"
+ },
+ {
+  "word": "kin",
+  "rank": 53,
+  "count": 76763,
+  "category": "common",
+  "book": "ku suli",
+  "ucsur": "U+F1979",
+  "en": "(particle) [after phrase or at sentence start] too, also, as well, additionally",
+  "ja": "{a を参照} | ALT 確かに、じつに、～も、～もまた"
+ },
+ {
+  "word": "lape",
+  "rank": 54,
+  "count": 74006,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1922",
+  "en": "sleep, rest, break from an activity or work",
+  "ja": "眠る、寝る、休む"
+ },
+ {
+  "word": "n",
+  "rank": 55,
+  "count": 71093,
+  "category": "common",
+  "book": "ku suli",
+  "ucsur": "U+F1986",
+  "en": "(interjection) hm, uh, mm, er, umm, [indicate thinking or pause]",
+  "ja": "(思案する、熟考する、気づく、同意する、口ごもるときの声)"
+ },
+ {
+  "word": "sin",
+  "rank": 56,
+  "count": 70103,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F195D",
+  "en": "new, fresh, update; repeat, do again",
+  "ja": "新しい、新鮮な、できたての; 追加の、さらなる、余分の"
+ },
+ {
+  "word": "lipu",
+  "rank": 57,
+  "count": 69580,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F192A",
+  "en": "flat and bendable object, e.g. paper, card, leaf; written text or document, e.g. book, website, clay tablet",
+  "ja": "flat and bendable object, e.g. paper, card, leaf; written text or document, e.g. book, website, clay tablet"
+ },
+ {
+  "word": "telo",
+  "rank": 58,
+  "count": 69335,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F196A",
+  "en": "liquids e.g. water, gasoline, soda, lava, soup, oil, ink",
+  "ja": "水、液体、流れ、濡れた; 飲み物"
+ },
+ {
+  "word": "nasa",
+  "rank": 59,
+  "count": 68333,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F193E",
+  "en": "strange, unusual, silly, abnormal, unexpected; drunk, intoxicated",
+  "ja": "変な、奇妙な; 狂った; 酔った、熱狂した"
+ },
+ {
+  "word": "pini",
+  "rank": 60,
+  "count": 67642,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1950",
+  "en": "finish, stop, prevent; close, disable, turn off; ended, past; edge, end, conclusion",
+  "ja": "終わった、仕上がった、済んだ、過去の、以前の"
+ },
+ {
+  "word": "nanpa",
+  "rank": 61,
+  "count": 65406,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F193D",
+  "en": "number; (particle) [ordinal number], -th",
+  "ja": "～番目の; 数、番号"
+ },
+ {
+  "word": "lawa",
+  "rank": 62,
+  "count": 64092,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1924",
+  "en": "head, mind, brain; control, lead, guide; government, leader; rule, law",
+  "ja": "頭、思考; 支配する、指揮する、指導する、導く、率いる、統制する、統治する"
+ },
+ {
+  "word": "kalama",
+  "rank": 63,
+  "count": 63899,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1915",
+  "en": "to produce sound; sound, e.g. sing, thunder, drum, clap, laugh, beep",
+  "ja": "音をたてる; 声を上げる、朗唱する、音声"
+ },
+ {
+  "word": "kulupu",
+  "rank": 64,
+  "count": 63273,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F191F",
+  "en": "group, community, society, company, nation, collection, team, crowd",
+  "ja": "集まり、集団、共同体、会社、民族"
+ },
+ {
+  "word": "luka",
+  "rank": 65,
+  "count": 62983,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F192D",
+  "en": "hand, arm, tactile limb, grasping limb; to grasp, interact with, feel using touch; (number) five",
+  "ja": "hand, arm, tactile limb, grasping limb; to grasp, interact with, feel using touch; (number) five"
+ },
+ {
+  "word": "pakala",
+  "rank": 66,
+  "count": 61827,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1948",
+  "en": "damaged, broken, botched, harmed, messed up; mistake",
+  "ja": "damaged, broken, botched, harmed, messed up; mistake"
+ },
+ {
+  "word": "suno",
+  "rank": 67,
+  "count": 59350,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1964",
+  "en": "light, shine, glow, radiance; sun, light source; brightness",
+  "ja": "太陽; 光、輝き、明かり、照明、輝く; 光源"
+ },
+ {
+  "word": "en",
+  "rank": 68,
+  "count": 59078,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F190A",
+  "en": "(particle) [separates multiple subjects]",
+  "ja": "(複数の主語を並べるとき、間におく)"
+ },
+ {
+  "word": "weka",
+  "rank": 69,
+  "count": 57236,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1976",
+  "en": "absent, away, distant; distant place; remove, get rid of",
+  "ja": "不在の、なくなった、遠い、無視された、除く、捨てる、消す"
+ },
+ {
+  "word": "awen",
+  "rank": 70,
+  "count": 55615,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1908",
+  "en": "stay, remain, wait, pause; protect, keep safe; continue; (preverb) continue to",
+  "ja": "持続する、保護された、安全な、保持する、待機する、とどまる; (pv.) ～し続ける、～のままにする"
+ },
+ {
+  "word": "sewi",
+  "rank": 71,
+  "count": 51025,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F195A",
+  "en": "up, top, highest part, area above, sky; divine, sacred, supernatural; awesome, inspiring, excelling",
+  "ja": "上方、最上部、高い、空; 畏敬すべき、神の、神聖な、超自然の"
+ },
+ {
+  "word": "suwi",
+  "rank": 72,
+  "count": 48614,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1966",
+  "en": "sweet, fragrant; cute, adorable",
+  "ja": "甘い、香しい; かわいい、純真な、愛らしい"
+ },
+ {
+  "word": "kon",
+  "rank": 73,
+  "count": 41251,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F191D",
+  "en": "air, breath, wind; essence, spirit, soul, ghost; unseen agent",
+  "ja": "空気、息、精神、霊; 幽事、見えざる行為者"
+ },
+ {
+  "word": "sike",
+  "rank": 74,
+  "count": 39802,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F195C",
+  "en": "circle, sphere, spiral, round thing e.g. ball, wheel; repeating thing e.g. cycle, orbit, loop",
+  "ja": "円いもの、循環するもの; ボール、球、円、周期、輪; 一年の"
+ },
+ {
+  "word": "poka",
+  "rank": 75,
+  "count": 38352,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1952",
+  "en": "hip, side; area nearby, vicinity, surroundings",
+  "ja": "腰、側; 隣、そば、近く | ALT ～とともに、～のそばに"
+ },
+ {
+  "word": "olin",
+  "rank": 76,
+  "count": 37917,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1945",
+  "en": "to have a strong emotional bond with, e.g. affection, appreciation, compassion, respect; platonic, romantic, or familial relationships",
+  "ja": "to have a strong emotional bond with, e.g. affection, appreciation, compassion, respect; platonic, romantic, or familial relationships"
+ },
+ {
+  "word": "kasi",
+  "rank": 77,
+  "count": 36254,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1917",
+  "en": "plant, vegetation; herb, leaf",
+  "ja": "植物、草木; 草、葉"
+ },
+ {
+  "word": "mama",
+  "rank": 78,
+  "count": 33240,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1931",
+  "en": "parent, ancestor; creator, originator; caretaker, sustainer, guardian",
+  "ja": "親、祖先; 創始者、作者; 世話人、管理人"
+ },
+ {
+  "word": "moli",
+  "rank": 79,
+  "count": 33205,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1937",
+  "en": "death, dead, die, dying; kill, murder",
+  "ja": "死ぬ、死の、殺す"
+ },
+ {
+  "word": "waso",
+  "rank": 80,
+  "count": 32894,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1974",
+  "en": "bird, flying creature, winged animal",
+  "ja": "鳥、飛翔する生物、有翼動物"
+ },
+ {
+  "word": "kute",
+  "rank": 81,
+  "count": 30393,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1920",
+  "en": "ear, hearing organ; hear, listen, pay attention to, obey",
+  "ja": "ear, hearing organ; hear, listen, pay attention to, obey"
+ },
+ {
+  "word": "insa",
+  "rank": 82,
+  "count": 30373,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F190F",
+  "en": "inside, area within; center, middle, midpoint; internal",
+  "ja": "中心、内部、中間、内容; 内臓、腹"
+ },
+ {
+  "word": "utala",
+  "rank": 83,
+  "count": 29617,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1971",
+  "en": "fight, compete, battle; competition, challenge; struggle, strive",
+  "ja": "戦う、争う、挑む、競う、攻撃する"
+ },
+ {
+  "word": "kili",
+  "rank": 84,
+  "count": 29503,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F191A",
+  "en": "fruit, vegetable, mushroom",
+  "ja": "果物、野菜、キノコ"
+ },
+ {
+  "word": "poki",
+  "rank": 85,
+  "count": 28083,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1953",
+  "en": "container e.g. bag, bowl, box, cup, cupboard, drawer, folder",
+  "ja": "容れ物、袋、器、箱、カップ、収納家具"
+ },
+ {
+  "word": "len",
+  "rank": 86,
+  "count": 27946,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1925",
+  "en": "cloth, clothing, fabric, textile; covered, hidden, secret, private",
+  "ja": "cloth, clothing, fabric, textile; covered, hidden, secret, private"
+ },
+ {
+  "word": "seli",
+  "rank": 87,
+  "count": 27177,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1957",
+  "en": "hot, warm; heat, fire, flame; burn",
+  "ja": "火; 加熱 (調理)、化学反応、熱源"
+ },
+ {
+  "word": "kala",
+  "rank": 88,
+  "count": 25915,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1914",
+  "en": "fish, marine animal, sea creature, swimming creature",
+  "ja": "魚、水棲生物、海洋生物"
+ },
+ {
+  "word": "open",
+  "rank": 89,
+  "count": 25915,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1947",
+  "en": "begin, start, open, turn on; beginning",
+  "ja": "始める、始まる; 開く; 開ける"
+ },
+ {
+  "word": "kiwen",
+  "rank": 90,
+  "count": 25464,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F191B",
+  "en": "hard object e.g. metal, stone, wood",
+  "ja": "固形物、金属、岩、石、堅い"
+ },
+ {
+  "word": "pu",
+  "rank": 91,
+  "count": 25173,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1955",
+  "en": "interacting with the book Toki Pona: The Language of Good by Sonja Lang",
+  "ja": "Sonja Lang 氏の 『Toki Pona: The Language of Good』 を扱っている"
+ },
+ {
+  "word": "linja",
+  "rank": 92,
+  "count": 25074,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1929",
+  "en": "long, flexible thing, e.g. rope, yarn, hair, fur, line, strand",
+  "ja": "長くて柔軟なもの; 紐、毛、髪、縄、糸、筋 | ALT 線、繫がり"
+ },
+ {
+  "word": "pimeja",
+  "rank": 93,
+  "count": 24872,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F194F",
+  "en": "dark, unlit; dark color, e.g. black, purple, brown",
+  "ja": "黒い、暗い、闇、影"
+ },
+ {
+  "word": "alasa",
+  "rank": 94,
+  "count": 24712,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1903",
+  "en": "hunt, forage, search, attempt; (preverb) try to",
+  "ja": "hunt, forage, search, attempt; (preverb) try to"
+ },
+ {
+  "word": "mani",
+  "rank": 95,
+  "count": 24007,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1932",
+  "en": "money, currency; thing of value e.g. gold, investment, livestock",
+  "ja": "お金、貨幣、財産、富; 大型の家畜"
+ },
+ {
+  "word": "mun",
+  "rank": 96,
+  "count": 23430,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F193A",
+  "en": "moon, night sky object, star, celestial body",
+  "ja": "月、星、天体 | ALT 暗闇に光るもの"
+ },
+ {
+  "word": "ko",
+  "rank": 97,
+  "count": 23422,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F191C",
+  "en": "semi-solid, e.g. paste, powder, goo, sand, soil, clay; squishy, moldable; sticky",
+  "ja": "semi-solid, e.g. paste, powder, goo, sand, soil, clay; squishy, moldable; sticky"
+ },
+ {
+  "word": "pipi",
+  "rank": 98,
+  "count": 22911,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1951",
+  "en": "insect, bug, spider, tiny crawling creature",
+  "ja": "虫、微小な生物、昆虫、蜘蛛"
+ },
+ {
+  "word": "uta",
+  "rank": 99,
+  "count": 22667,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1970",
+  "en": "mouth, lips, throat, consuming orifice",
+  "ja": "mouth, lips, throat, consuming orifice"
+ },
+ {
+  "word": "sijelo",
+  "rank": 100,
+  "count": 22652,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F195B",
+  "en": "body, shape, physical state, torso, substance, form",
+  "ja": "body, shape, physical state, torso, substance, form"
+ },
+ {
+  "word": "kule",
+  "rank": 101,
+  "count": 22171,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F191E",
+  "en": "color, pigment; category, genre, flavor; colorful, diverse",
+  "ja": "color, pigment; category, genre, flavor; colorful, diverse"
+ },
+ {
+  "word": "pan",
+  "rank": 102,
+  "count": 22013,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F194B",
+  "en": "grains, starchy foods, baked goods e.g. rice, sorghum, bread, noodles, masa, porridge, injera",
+  "ja": "穀類、穀物; ごはん、麦、米; パン、麵"
+ },
+ {
+  "word": "unpa",
+  "rank": 103,
+  "count": 20955,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F196F",
+  "en": "sex, to have sex with",
+  "ja": "性的関係をもつ、性的な"
+ },
+ {
+  "word": "meli",
+  "rank": 104,
+  "count": 20829,
+  "category": "common",
+  "book": "pu",
+  "ucsur": "U+F1933",
+  "en": "woman, female, feminine person, wife, girlfriend",
+  "ja": "女、メス、女性的な人、ガールフレンド"
+ },
+ {
+  "word": "jaki",
+  "rank": 105,
+  "count": 20420,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1910",
+  "en": "disgusting, unclean, unsanitary, toxic, repulsive, rotten",
+  "ja": "不快な、汚れた、有毒の、不潔な、卑猥な、病的な"
+ },
+ {
+  "word": "anpa",
+  "rank": 106,
+  "count": 19906,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1905",
+  "en": "bottom, underside, area below; defeated, humble, lowly",
+  "ja": "bottom, underside; below, beneath; defeated, humble, lowly"
+ },
+ {
+  "word": "kijetesantakalu",
+  "rank": 107,
+  "count": 19570,
+  "category": "common",
+  "book": "ku suli",
+  "ucsur": "U+F1980",
+  "en": "raccoon, kinkajou; any procyonid; any musteloid",
+  "ja": "アライグマ科の動物全般 (アライグマ、ハナグマ、キンカジュー、オリンゴ、カコミスルなど) | ALT イタチ上科の動物全般 (アライグマ、イタチ、カワウソ、スカンク、レッサーパンダを含む)"
+ },
+ {
+  "word": "esun",
+  "rank": 108,
+  "count": 18967,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F190B",
+  "en": "trade, barter, exchange, swap, buy, sell; market, shop, fair, bazaar, place of business",
+  "ja": "市場、店、売買、取引"
+ },
+ {
+  "word": "akesi",
+  "rank": 109,
+  "count": 18862,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1901",
+  "en": "reptile, amphibian, scaly creature, crawling creature",
+  "ja": "かわいくない動物 (この語義は現在では廃れる); 爬虫類、両棲類"
+ },
+ {
+  "word": "loje",
+  "rank": 110,
+  "count": 17466,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F192B",
+  "en": "red, magenta, scarlet, pink, rust-colored, reddish orange",
+  "ja": "赤い、赤みがかった"
+ },
+ {
+  "word": "monsuta",
+  "rank": 111,
+  "count": 17466,
+  "category": "common",
+  "book": "ku suli",
+  "ucsur": "U+F197D",
+  "en": "fear, nervousness, dread; scary, frightening; scary thing e.g. predator, threat, danger",
+  "ja": "恐れる、怖がる; 怪物、捕食者; 脅威、危険"
+ },
+ {
+  "word": "palisa",
+  "rank": 112,
+  "count": 16354,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F194A",
+  "en": "long and hard thing e.g. branch, pole, rod, stick, spine, mast",
+  "ja": "長くて堅いもの; 枝、棒"
+ },
+ {
+  "word": "supa",
+  "rank": 113,
+  "count": 16290,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1965",
+  "en": "flat horizontal surface, especially to put or rest things on e.g. bed, floor, desk, plate, table, platform, stage",
+  "ja": "水平面、台、卓、盤、(家具などの) ものを置くところ"
+ },
+ {
+  "word": "lete",
+  "rank": 114,
+  "count": 15875,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1926",
+  "en": "cold, cool, frozen; freeze, chill; raw, uncooked",
+  "ja": "冷たい、寒い、凍った、涼しい; 未調理の、生の"
+ },
+ {
+  "word": "mije",
+  "rank": 115,
+  "count": 15214,
+  "category": "common",
+  "book": "pu",
+  "ucsur": "U+F1935",
+  "en": "man, male, masculine person, husband, boyfriend",
+  "ja": "男、オス、男性的な人、夫、ボーイフレンド"
+ },
+ {
+  "word": "noka",
+  "rank": 116,
+  "count": 14363,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1943",
+  "en": "foot, leg, organ of locomotion, roots",
+  "ja": "足、脚、移動器官; 下、下部"
+ },
+ {
+  "word": "laso",
+  "rank": 117,
+  "count": 14301,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1923",
+  "en": "turquoise, blue, green, cyan, indigo, lime green",
+  "ja": "青い、緑の"
+ },
+ {
+  "word": "tonsi",
+  "rank": 118,
+  "count": 14088,
+  "category": "common",
+  "book": "ku suli",
+  "ucsur": "U+F197E",
+  "en": "nonbinary, gender nonconforming, genderqueer, transgender*",
+  "ja": "ノンバイナリー、旧来の性別の規範に属さない | ALT トランスジェンダー、間性"
+ },
+ {
+  "word": "walo",
+  "rank": 119,
+  "count": 13151,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1972",
+  "en": "light-colored, white, pale, light gray, cream",
+  "ja": "白い、白んだ; 淡い、薄色の"
+ },
+ {
+  "word": "nena",
+  "rank": 120,
+  "count": 12878,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1940",
+  "en": "protuberances e.g. bump, button, hill, nose",
+  "ja": "こぶ、丘、山、ボタン、鼻、突出部"
+ },
+ {
+  "word": "jelo",
+  "rank": 121,
+  "count": 12542,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1912",
+  "en": "yellow, amber, golden, lime yellow, yellowish orange",
+  "ja": "黄色の、黄ばんだ"
+ },
+ {
+  "word": "sinpin",
+  "rank": 122,
+  "count": 12523,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F195F",
+  "en": "vertical surface e.g. wall, board; front part, area in front; face",
+  "ja": "顔、前、先頭の、前部、壁"
+ },
+ {
+  "word": "ku",
+  "rank": 123,
+  "count": 10892,
+  "category": "common",
+  "book": "ku suli",
+  "ucsur": "U+F1988",
+  "en": "interacting with the book Toki Pona Dictionary (2021) by Sonja Lang",
+  "ja": "interacting with the book Toki Pona Dictionary (2021) by Sonja Lang"
+ },
+ {
+  "word": "lupa",
+  "rank": 124,
+  "count": 10328,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F192F",
+  "en": "hole, pit, cave, doorway, window, portal",
+  "ja": "孔、開口部、扉、窓"
+ },
+ {
+  "word": "selo",
+  "rank": 125,
+  "count": 10231,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1958",
+  "en": "outer layer, e.g. skin, peel, shell, bark; outer shape, outer form, boundary",
+  "ja": "outer layer, e.g. skin, peel, shell, bark; outer shape, outer form, boundary"
+ },
+ {
+  "word": "leko",
+  "rank": 126,
+  "count": 9315,
+  "category": "common",
+  "book": "ku suli",
+  "ucsur": "U+F197C",
+  "en": "square, cube, block, blocky object e.g. bricks, stairs",
+  "ja": "square, cube, block, blocky object e.g. bricks, stairs"
+ },
+ {
+  "word": "namako",
+  "rank": 127,
+  "count": 9296,
+  "category": "common",
+  "book": "ku suli",
+  "ucsur": "U+F1978",
+  "en": "spice, ornament, adornment; extra, additional",
+  "ja": "{sin を参照} | ALT 装飾、調味料、おまけ; 追加の、余分の"
+ },
+ {
+  "word": "kipisi",
+  "rank": 128,
+  "count": 8431,
+  "category": "common",
+  "book": "ku suli",
+  "ucsur": "U+F197B",
+  "en": "split, cut, slice; piece, part; sharp, pointy",
+  "ja": "分割する、切断する、切り取る、分離する; 鋭い"
+ },
+ {
+  "word": "monsi",
+  "rank": 129,
+  "count": 8323,
+  "category": "core",
+  "book": "pu",
+  "ucsur": "U+F1938",
+  "en": "back, rear, area behind",
+  "ja": "後ろ、後部、背後、背中"
+ },
+ {
+  "word": "soko",
+  "rank": 130,
+  "count": 7099,
+  "category": "common",
+  "book": "ku suli",
+  "ucsur": "U+F1981",
+  "en": "mushroom, fungus, lichen",
+  "ja": "茸、菌類"
+ },
+ {
+  "word": "misikeke",
+  "rank": 131,
+  "count": 4551,
+  "category": "common",
+  "book": "ku suli",
+  "ucsur": "U+F1987",
+  "en": "medical item or practice e.g. prescriptions, meditation, exercise, bandages, therapy",
+  "ja": "薬、医療"
+ }
+]
