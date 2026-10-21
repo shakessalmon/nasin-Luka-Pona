@@ -1,6 +1,6 @@
-# toki pona Flick
+# nasin Luka Pona
 
-A flick keyboard for [toki pona](https://tokipona.org/), modeled on the Japanese 12-key flick pad.
+*nasin luka pona* — “the good way of the hand”: a flick keyboard for [toki pona](https://tokipona.org/), modeled on the Japanese 12-key flick pad.
 One tap or one flick types one whole word.
 
 - **Tap** a key for the word in the middle; **flick** left, up, right or down for the words around it.
@@ -9,7 +9,7 @@ One tap or one flick types one whole word.
   `mi` ↓, `sina` ↑, `ona` ←, `pona` ↑ / `ike` ↓, `lili` ← / `suli` →, `monsi` ← / `sinpin` →, `anpa` ↓.
 - Keys show sitelen pona glyphs; the keyboard types Latin text (`toki `, with the space added for you).
 
-**Try the web prototype:** open `web/index.html` (or the GitHub Pages site, once enabled) on a phone.
+**Try the web prototype:** open `web/index.html` on a phone, or the GitHub Pages site: https://shakessalmon.github.io/nasin-luka-pona/web/ (after Pages is enabled).
 
 ## Layers
 
