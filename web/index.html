@@ -58,6 +58,8 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
 .key.side { background: var(--key-side); filter: brightness(1.08); font-size: 0.85rem; font-weight: 600; aspect-ratio: auto; }
 .key.side.on { background: var(--accent); color: var(--hot-fg); filter: none; }
 .key.side.on small { color: var(--hot-fg); }
+.key.side .lk { display: block; font-family: var(--sp); font-weight: 400; font-size: 1.7rem; line-height: 1.1; }
+.key.side .lw { display: block; font-size: 0.85rem; }
 .key.side small { display: block; font-size: 0.6rem; color: var(--muted); font-weight: 400; }
 .key.pressed { background: var(--accent-soft); }
 .pop { position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translateX(-50%); background: var(--hot); color: var(--hot-fg);
@@ -105,7 +107,7 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
 
   <section class="notes">
     <div>Directions follow the glyphs. mi points down, sina points up and ona points left, so you flick that way. pona (∪) is up and ike (∩) is down; lili and suli sit on opposite sides. In the Position key, insa (dot inside) is the tap, sinpin (dot in front) is right, monsi (dot behind) is left, anpa is down. tan (where you come from) is left and tawa (where you go) is right.</div>
-    <div>Right column: ⌫ tap deletes a letter, a flick in any direction deletes a word · space · punctuation (tap “.”, ← “,”, ↑ “?”, → “!”, ↓ “:”) · return. Left column: ABC letters · layer 2 · layer 3 · next keyboard.</div>
+    <div>Right column: ⌫ tap deletes a letter, a flick in any direction deletes a word · space (the blank key) · punctuation (tap “.”, ← “,”, ↑ “?”, → “!”, ↓ “:”) · ⏎ return. Left column: ABC letters · layer 2 (soweli) · layer 3 (poki) · next keyboard. While layer 2 or 3 is open, its key shows toki and takes you back to layer 1.</div>
     <div>Layer 1 holds 57 words that cover about 87% of the words in real toki pona text. Empty slots on layers 2 and 3 are left for new words (nimisin) or your own picks.</div>
     <div>Sources: words and glyph codepoints from <a href="https://github.com/lipu-linku/sona" target="_blank" rel="noopener">lipu Linku</a> (CC BY-SA 4.0) · word frequency from <a href="https://sona.pona.la/wiki/Word_frequency" target="_blank" rel="noopener">sona pona wiki</a> (ilo Muni) · font <a href="https://github.com/ETBCOR/nasin-nanpa" target="_blank" rel="noopener">nasin nanpa</a> by jan Itan (MIT License).</div>
   </section>
@@ -179,15 +181,23 @@ function attachFlick(el, slots, onPick, popLabel){
 const wordPop = w => `<span class="pg">${g(w)}</span><span>${w}</span>`;
 const textPop = s => `<span>${s}</span>`;
 
-function sideKey(label, sub, slots, onPick, pop, active){
+function sideKey(label, sub, slots, onPick, pop, active, aria){
   const b = document.createElement("button");
   b.className = "key side" + (active ? " on" : ""); b.type = "button";
   b.innerHTML = `${label}${sub ? `<small>${sub}</small>` : ""}`;
-  b.setAttribute("aria-label", label + (sub ? " " + sub : ""));
+  b.setAttribute("aria-label", aria || (label + (sub ? " " + sub : "")));
   attachFlick(b, slots, onPick, pop || (() => textPop(label)));
   return b;
 }
 const go = m => { mode = m; build(); };
+const LAYER_ICON = ["toki", "soweli", "poki"];
+// a layer key shows that layer's icon word; while its layer is open it turns into the way back to layer 1
+function layerKey(n){
+  const active = mode === n, w = LAYER_ICON[active ? 0 : n];
+  const face = labelSp ? `<span class="lk">${g(w)}</span>` : `<span class="lw">${w}</span>`;
+  return sideKey(face, labelSp ? w : "", one(1), () => go(active ? 0 : n), () => wordPop(w), active,
+    active ? "Back to layer 1" : `Layer ${n + 1}`);
+}
 const one = v => [v,"","","",""];
 
 function build(){
@@ -196,17 +206,17 @@ function build(){
   $("layername").innerHTML = `<b>${NAMES[mode]}</b>`;
   const keys = mode < 3 ? LAYOUT[mode] : ABC;
   const left = [
-    mode === 3 ? sideKey("Words", "back", one(1), () => go(0), null, true) : sideKey("ABC", "letters", one(1), () => go(3)),
-    mode === 1 ? sideKey("1", "back", one(1), () => go(0), null, true) : sideKey("2", "nature", one(1), () => go(1)),
-    mode === 2 ? sideKey("1", "back", one(1), () => go(0), null, true) : sideKey("3", "position", one(1), () => go(2)),
+    mode === 3 ? sideKey(labelSp ? `<span class="lk">${g("toki")}</span>` : `<span class="lw">toki</span>`, labelSp ? "toki" : "", one(1), () => go(0), () => wordPop("toki"), true, "Back to layer 1") : sideKey("ABC", "", one(1), () => go(3), null, false, "Letters"),
+    layerKey(1),
+    layerKey(2),
     sideKey("🌐", "next", one(1), () => { $("status").textContent = "In the app, this key switches to your next keyboard."; }),
   ];
   const right = [
     sideKey("⌫", "flick: word", ["c","w","w","w","w"], (v) => v === "c" ? delChar() : delWord(),
       (v) => textPop(v === "c" ? "1 letter" : "1 word")),
-    sideKey("space", "", one(1), () => insertChar(" ")),
+    sideKey("", "", one(1), () => insertChar(" "), () => textPop("␣"), false, "Space"),
     sideKey(". ,", "? ! :", PUNCT, insertPunct, textPop),
-    sideKey("return", "", one(1), () => put(txt.value.replace(/ +$/,"") + "\n")),
+    sideKey("⏎", "", one(1), () => put(txt.value.replace(/ +$/,"") + "\n")),
   ];
   keys.forEach((k, i) => {
     if (i % 3 === 0) kb.appendChild(left[i / 3]);
