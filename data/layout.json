@@ -41,13 +41,13 @@
    ]
   },
   {
-   "g": "Qualities",
+   "g": "Language",
    "w": [
-    "wawa",
-    "lili",
-    "pona",
-    "suli",
-    "ike"
+    "toki",
+    "nimi",
+    "sitelen",
+    "lipu",
+    "musi"
    ]
   },
   {
@@ -61,16 +61,6 @@
    ]
   },
   {
-   "g": "Language",
-   "w": [
-    "toki",
-    "nimi",
-    "sitelen",
-    "lipu",
-    "musi"
-   ]
-  },
-  {
    "g": "Actions",
    "w": [
     "pali",
@@ -78,6 +68,16 @@
     "jo",
     "lukin",
     "ante"
+   ]
+  },
+  {
+   "g": "Qualities",
+   "w": [
+    "wawa",
+    "lili",
+    "pona",
+    "suli",
+    "ike"
    ]
   },
   {

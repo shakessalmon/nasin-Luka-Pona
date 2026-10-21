@@ -60,6 +60,8 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
 .key.side.on small { color: var(--hot-fg); }
 .key.side .lk { display: block; font-family: var(--sp); font-weight: 400; font-size: 1.7rem; line-height: 1.1; }
 .key.side .lw { display: block; font-size: 0.85rem; }
+.key.side.punc .c { font-size: 1.2rem; }
+.key.side.punc .d { font-size: 0.85rem; font-family: var(--sans); }
 .key.side small { display: block; font-size: 0.6rem; color: var(--muted); font-weight: 400; }
 .key.pressed { background: var(--accent-soft); }
 .pop { position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translateX(-50%); background: var(--hot); color: var(--hot-fg);
@@ -114,7 +116,7 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
 </div>
 
 <script>
-const LAYOUT = [[{"g": "Pronouns", "w": ["ni", "ona", "sina", "jan", "mi"]}, {"g": "Grammar", "w": ["li", "la", "o", "e", "pi"]}, {"g": "Prepositions", "w": ["lon", "tan", "sama", "tawa", "kepeken"]}, {"g": "Negation & logic", "w": ["ala", "anu", "seme", "taso", "en"]}, {"g": "Qualities", "w": ["wawa", "lili", "pona", "suli", "ike"]}, {"g": "Mind & will", "w": ["wile", "ken", "kama", "sona", "pilin"]}, {"g": "Language", "w": ["toki", "nimi", "sitelen", "lipu", "musi"]}, {"g": "Actions", "w": ["pali", "pana", "jo", "lukin", "ante"]}, {"g": "Numbers", "w": ["mute", "wan", "tu", "ale", "nanpa"]}, {"g": "Time & place", "w": ["tenpo", "ma", "tomo", "nasin", ""]}, {"g": "Things & life", "w": ["ijo", "ilo", "moku", "lape", ""]}, {"g": "Interjections", "w": ["a", "n", "mu", "kin", ""]}], [{"g": "Animals", "w": ["soweli", "kala", "waso", "pipi", "akesi"]}, {"g": "Plants & food", "w": ["kasi", "kili", "pan", "soko", "kijetesantakalu"]}, {"g": "Sky & light", "w": ["suno", "mun", "sewi", "pimeja", ""]}, {"g": "Matter", "w": ["telo", "ko", "kon", "kiwen", ""]}, {"g": "Colors", "w": ["kule", "loje", "jelo", "laso", "walo"]}, {"g": "Body", "w": ["sijelo", "uta", "lawa", "luka", "noka"]}, {"g": "People", "w": ["kulupu", "mama", "meli", "mije", "tonsi"]}, {"g": "Feelings", "w": ["olin", "suwi", "monsuta", "jaki", "nasa"]}, {"g": "Surfaces & holes", "w": ["selo", "", "nena", "", "lupa"]}, {"g": "Sound", "w": ["kalama", "kute", "", "", ""]}, {"g": "Life & death", "w": ["unpa", "moli", "misikeke", "", ""]}, {"g": "Heat", "w": ["seli", "", "", "", "lete"]}], [{"g": "Position", "w": ["insa", "monsi", "poka", "sinpin", "anpa"]}, {"g": "Box, open & close", "w": ["poki", "open", "awen", "pini", "weka"]}, {"g": "Conflict", "w": ["utala", "alasa", "pakala", "kipisi", ""]}, {"g": "Objects", "w": ["len", "palisa", "", "supa", ""]}, {"g": "Shapes", "w": ["sike", "leko", "linja", "", ""]}, {"g": "Money", "w": ["mani", "esun", "", "", ""]}, {"g": "New & extra", "w": ["sin", "namako", "", "", ""]}, {"g": "Books", "w": ["pu", "ku", "", "", ""]}, {"g": "", "w": ["", "", "", "", ""]}, {"g": "", "w": ["", "", "", "", ""]}, {"g": "", "w": ["", "", "", "", ""]}, {"g": "", "w": ["", "", "", "", ""]}]];
+const LAYOUT = [[{"g": "Pronouns", "w": ["ni", "ona", "sina", "jan", "mi"]}, {"g": "Grammar", "w": ["li", "la", "o", "e", "pi"]}, {"g": "Prepositions", "w": ["lon", "tan", "sama", "tawa", "kepeken"]}, {"g": "Negation & logic", "w": ["ala", "anu", "seme", "taso", "en"]}, {"g": "Language", "w": ["toki", "nimi", "sitelen", "lipu", "musi"]}, {"g": "Mind & will", "w": ["wile", "ken", "kama", "sona", "pilin"]}, {"g": "Actions", "w": ["pali", "pana", "jo", "lukin", "ante"]}, {"g": "Qualities", "w": ["wawa", "lili", "pona", "suli", "ike"]}, {"g": "Numbers", "w": ["mute", "wan", "tu", "ale", "nanpa"]}, {"g": "Time & place", "w": ["tenpo", "ma", "tomo", "nasin", ""]}, {"g": "Things & life", "w": ["ijo", "ilo", "moku", "lape", ""]}, {"g": "Interjections", "w": ["a", "n", "mu", "kin", ""]}], [{"g": "Animals", "w": ["soweli", "kala", "waso", "pipi", "akesi"]}, {"g": "Plants & food", "w": ["kasi", "kili", "pan", "soko", "kijetesantakalu"]}, {"g": "Sky & light", "w": ["suno", "mun", "sewi", "pimeja", ""]}, {"g": "Matter", "w": ["telo", "ko", "kon", "kiwen", ""]}, {"g": "Colors", "w": ["kule", "loje", "jelo", "laso", "walo"]}, {"g": "Body", "w": ["sijelo", "uta", "lawa", "luka", "noka"]}, {"g": "People", "w": ["kulupu", "mama", "meli", "mije", "tonsi"]}, {"g": "Feelings", "w": ["olin", "suwi", "monsuta", "jaki", "nasa"]}, {"g": "Surfaces & holes", "w": ["selo", "", "nena", "", "lupa"]}, {"g": "Sound", "w": ["kalama", "kute", "", "", ""]}, {"g": "Life & death", "w": ["unpa", "moli", "misikeke", "", ""]}, {"g": "Heat", "w": ["seli", "", "", "", "lete"]}], [{"g": "Position", "w": ["insa", "monsi", "poka", "sinpin", "anpa"]}, {"g": "Box, open & close", "w": ["poki", "open", "awen", "pini", "weka"]}, {"g": "Conflict", "w": ["utala", "alasa", "pakala", "kipisi", ""]}, {"g": "Objects", "w": ["len", "palisa", "", "supa", ""]}, {"g": "Shapes", "w": ["sike", "leko", "linja", "", ""]}, {"g": "Money", "w": ["mani", "esun", "", "", ""]}, {"g": "New & extra", "w": ["sin", "namako", "", "", ""]}, {"g": "Books", "w": ["pu", "ku", "", "", ""]}, {"g": "", "w": ["", "", "", "", ""]}, {"g": "", "w": ["", "", "", "", ""]}, {"g": "", "w": ["", "", "", "", ""]}, {"g": "", "w": ["", "", "", "", ""]}]];
 const UCSUR = {"li": "U+F1927", "mi": "U+F1934", "e": "U+F1909", "a": "U+F1900", "pona": "U+F1954", "toki": "U+F196C", "ni": "U+F1941", "la": "U+F1921", "lon": "U+F192C", "ala": "U+F1902", "sina": "U+F195E", "jan": "U+F1911", "o": "U+F1944", "tawa": "U+F1969", "pi": "U+F194D", "sona": "U+F1961", "ona": "U+F1946", "mute": "U+F193C", "kama": "U+F1916", "tenpo": "U+F196B", "ken": "U+F1918", "seme": "U+F1959", "wile": "U+F1977", "taso": "U+F1968", "nimi": "U+F1942", "tan": "U+F1967", "pilin": "U+F194E", "ma": "U+F1930", "ale": "U+F1904", "musi": "U+F193B", "ike": "U+F190D", "lili": "U+F1928", "pali": "U+F1949", "sitelen": "U+F1960", "kepeken": "U+F1919", "ilo": "U+F190E", "tomo": "U+F196D", "lukin": "U+F192E", "moku": "U+F1936", "ante": "U+F1906", "ijo": "U+F190C", "suli": "U+F1963", "mu": "U+F1939", "sama": "U+F1956", "tu": "U+F196E", "nasin": "U+F193F", "anu": "U+F1907", "pana": "U+F194C", "soweli": "U+F1962", "jo": "U+F1913", "wan": "U+F1973", "wawa": "U+F1975", "kin": "U+F1979", "lape": "U+F1922", "n": "U+F1986", "sin": "U+F195D", "lipu": "U+F192A", "telo": "U+F196A", "nasa": "U+F193E", "pini": "U+F1950", "nanpa": "U+F193D", "lawa": "U+F1924", "kalama": "U+F1915", "kulupu": "U+F191F", "luka": "U+F192D", "pakala": "U+F1948", "suno": "U+F1964", "en": "U+F190A", "weka": "U+F1976", "awen": "U+F1908", "sewi": "U+F195A", "suwi": "U+F1966", "kon": "U+F191D", "sike": "U+F195C", "poka": "U+F1952", "olin": "U+F1945", "kasi": "U+F1917", "mama": "U+F1931", "moli": "U+F1937", "waso": "U+F1974", "kute": "U+F1920", "insa": "U+F190F", "utala": "U+F1971", "kili": "U+F191A", "poki": "U+F1953", "len": "U+F1925", "seli": "U+F1957", "kala": "U+F1914", "open": "U+F1947", "kiwen": "U+F191B", "pu": "U+F1955", "linja": "U+F1929", "pimeja": "U+F194F", "alasa": "U+F1903", "mani": "U+F1932", "mun": "U+F193A", "ko": "U+F191C", "pipi": "U+F1951", "uta": "U+F1970", "sijelo": "U+F195B", "kule": "U+F191E", "pan": "U+F194B", "unpa": "U+F196F", "meli": "U+F1933", "jaki": "U+F1910", "anpa": "U+F1905", "kijetesantakalu": "U+F1980", "esun": "U+F190B", "akesi": "U+F1901", "loje": "U+F192B", "monsuta": "U+F197D", "palisa": "U+F194A", "supa": "U+F1965", "lete": "U+F1926", "mije": "U+F1935", "noka": "U+F1943", "laso": "U+F1923", "tonsi": "U+F197E", "walo": "U+F1972", "nena": "U+F1940", "jelo": "U+F1912", "sinpin": "U+F195F", "ku": "U+F1988", "lupa": "U+F192F", "selo": "U+F1958", "leko": "U+F197C", "namako": "U+F1978", "kipisi": "U+F197B", "monsi": "U+F1938", "soko": "U+F1981", "misikeke": "U+F1987"};
 const ABC = [
   {g:"Symbols", w:["@","#","/","&","_"]}, {g:"", w:["a","b","c","",""]}, {g:"", w:["d","e","f","",""]},
@@ -190,12 +192,20 @@ function sideKey(label, sub, slots, onPick, pop, active, aria){
   return b;
 }
 const go = m => { mode = m; build(); };
+function puncKey(){
+  const b = document.createElement("button");
+  b.className = "key side punc"; b.type = "button";
+  b.setAttribute("aria-label", "Punctuation: tap for period, flick for comma, question mark, exclamation mark, colon");
+  b.innerHTML = `<span class="c">${PUNCT[0]}</span>` + ["pl","pu","pr","pd"].map((d, j) => `<span class="d ${d}">${PUNCT[j+1]}</span>`).join("");
+  attachFlick(b, PUNCT, insertPunct, textPop);
+  return b;
+}
 const LAYER_ICON = ["toki", "soweli", "poki"];
 // a layer key shows that layer's icon word; while its layer is open it turns into the way back to layer 1
 function layerKey(n){
   const active = mode === n, w = LAYER_ICON[active ? 0 : n];
   const face = labelSp ? `<span class="lk">${g(w)}</span>` : `<span class="lw">${w}</span>`;
-  return sideKey(face, labelSp ? w : "", one(1), () => go(active ? 0 : n), () => wordPop(w), active,
+  return sideKey(face, "", one(1), () => go(active ? 0 : n), () => wordPop(w), active,
     active ? "Back to layer 1" : `Layer ${n + 1}`);
 }
 const one = v => [v,"","","",""];
@@ -206,16 +216,16 @@ function build(){
   $("layername").innerHTML = `<b>${NAMES[mode]}</b>`;
   const keys = mode < 3 ? LAYOUT[mode] : ABC;
   const left = [
-    mode === 3 ? sideKey(labelSp ? `<span class="lk">${g("toki")}</span>` : `<span class="lw">toki</span>`, labelSp ? "toki" : "", one(1), () => go(0), () => wordPop("toki"), true, "Back to layer 1") : sideKey("ABC", "", one(1), () => go(3), null, false, "Letters"),
+    mode === 3 ? sideKey(labelSp ? `<span class="lk">${g("toki")}</span>` : `<span class="lw">toki</span>`, "", one(1), () => go(0), () => wordPop("toki"), true, "Back to layer 1") : sideKey("ABC", "", one(1), () => go(3), null, false, "Letters"),
     layerKey(1),
     layerKey(2),
-    sideKey("🌐", "next", one(1), () => { $("status").textContent = "In the app, this key switches to your next keyboard."; }),
+    sideKey("🌐", "", one(1), () => { $("status").textContent = "In the app, this key switches to your next keyboard."; }),
   ];
   const right = [
-    sideKey("⌫", "flick: word", ["c","w","w","w","w"], (v) => v === "c" ? delChar() : delWord(),
-      (v) => textPop(v === "c" ? "1 letter" : "1 word")),
+    sideKey("⌫", "", ["c","w","w","w","w"], (v) => v === "c" ? delChar() : delWord(),
+      (v) => textPop(v === "c" ? "1 letter" : "1 word"), false, "Delete: tap for a letter, flick for a word"),
     sideKey("", "", one(1), () => insertChar(" "), () => textPop("␣"), false, "Space"),
-    sideKey(". ,", "? ! :", PUNCT, insertPunct, textPop),
+    puncKey(),
     sideKey("⏎", "", one(1), () => put(txt.value.replace(/ +$/,"") + "\n")),
   ];
   keys.forEach((k, i) => {
