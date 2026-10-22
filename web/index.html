@@ -27,6 +27,12 @@ body { font-size: 15px; line-height: 1.5; }
   display: grid; gap: 12px; }
 h1 { font-size: 1.15rem; margin: 0; }
 .lede { margin: 2px 0 0; color: var(--muted); font-size: 0.82rem; }
+/* the intro starts folded so the keyboard fits on a phone screen without scrolling */
+.intro summary { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; cursor: pointer; list-style: none; }
+.intro summary::-webkit-details-marker { display: none; }
+.intro .more { font-size: 0.78rem; color: var(--accent); white-space: nowrap; }
+.intro .more::after { content: " ▸"; }
+.intro[open] .more::after { content: " ▾"; }
 .out { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: grid; gap: 6px; }
 .sp-line { font-family: var(--sp); font-size: 1.7rem; line-height: 1.3; min-height: 2.2rem; overflow-wrap: anywhere; }
 textarea { font: inherit; font-size: 1rem; width: 100%; box-sizing: border-box; min-height: 3.2rem; resize: vertical; border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; background: var(--bg); color: var(--fg); }
@@ -39,6 +45,7 @@ button { font: inherit; cursor: pointer; }
 .seg button[aria-pressed="true"] { background: var(--accent); color: var(--hot-fg); }
 button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .status { font-size: 0.78rem; color: var(--muted); min-height: 1.2em; }
+.status:empty { display: none; }
 
 .kb { background: var(--key-side); border-radius: 12px; padding: 5px; display: grid; grid-template-columns: 0.7fr repeat(3, minmax(0,1fr)) 0.7fr; gap: 5px;
   user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; touch-action: none; }
@@ -62,7 +69,6 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
 .key.side .lw { display: block; font-size: 0.85rem; }
 .key.side.punc .c { font-size: 1.2rem; }
 .key.side.punc .d { font-size: 0.85rem; font-family: var(--sans); }
-.key.side.punc .sp-word { font-size: 0.6rem; }
 .key.side small { display: block; font-size: 0.6rem; color: var(--muted); font-weight: 400; }
 .key.pressed { background: var(--accent-soft); }
 .pop { position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translateX(-50%); background: var(--hot); color: var(--hot-fg);
@@ -85,8 +91,10 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
 
 <div class="wrap" id="app">
   <header>
-    <h1>nasin Luka Pona</h1>
-    <p class="lede">Tap a key for the word in the middle, or flick left, up, right or down for the words around it. Related words share a key, and most words sit in the direction their sitelen pona glyph points. Try it with your finger on a phone.</p>
+    <details class="intro">
+      <summary><h1>nasin Luka Pona</h1><span class="more">How it works</span></summary>
+      <p class="lede">Tap a key for the word in the middle, or flick left, up, right or down for the words around it. Related words share a key, and most words sit in the direction their sitelen pona glyph points. Try it with your finger on a phone.</p>
+    </details>
   </header>
 
   <section class="out" aria-label="Output">
@@ -208,8 +216,8 @@ function symbolKey(faces, slots, onPick, pop, aria){
 const puncKey = () => symbolKey(PUNCT, PUNCT, insertPunct, textPop,
   "Punctuation: tap for period, flick left for comma, up for question mark, down for exclamation mark");
 const SPACE = [" ", ":", ":", ":", ":"];
-// "space" in words: a ␣ sign would look like the poki glyph on the layer 3 key
-const spaceKey = () => symbolKey(['<span class="sp-word">space</span>', ...SPACE.slice(1)], SPACE, v => v === " " ? insertChar(" ") : insertPunct(":"),
+// every flick types ":", but only the left one is drawn to keep the key quiet
+const spaceKey = () => symbolKey(["␣", ":", "", "", ""], SPACE, v => v === " " ? insertChar(" ") : insertPunct(":"),
   v => textPop(v === " " ? "␣" : ":"), "Space: tap for a space, flick in any direction for a colon");
 const LAYER_ICON = ["toki", "soweli", "poki"];
 // a layer key shows that layer's icon word; while its layer is open it turns into the way back to layer 1

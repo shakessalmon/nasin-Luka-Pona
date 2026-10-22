@@ -194,13 +194,13 @@ final class KeyboardViewController: UIInputViewController {
         return key
     }
 
-    /// Tap: a space. Flick in any direction: a colon (as in "e ni:"). The face shows both;
-    /// "space" is spelled out because a ␣ sign looks like the poki glyph on the layer 3 key.
+    /// Tap: a space. Flick in any direction: a colon (as in "e ni:").
+    /// Only the left colon is drawn to keep the key quiet.
     private func spaceKey() -> FlickKey {
-        let key = sideKey("space", preview: { i in (nil, i == 0 ? "␣" : ":") }, pick: { [weak self] i in
+        let key = sideKey("␣", preview: { i in (nil, i == 0 ? "␣" : ":") }, pick: { [weak self] i in
             if i == 0 { self?.proxy.insertText(" ") } else { self?.insertPunctuation(":") }
         })
-        key.setLabels(main: "space", edges: Array(repeating: ":", count: 4), font: Fonts.latin(size(13), bold: true), edgeFont: Fonts.latin(size(13)))
+        key.setLabels(main: "␣", edges: [":"], font: Fonts.latin(size(20), bold: true), edgeFont: Fonts.latin(size(13)))
         return key
     }
 
