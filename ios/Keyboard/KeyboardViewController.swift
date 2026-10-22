@@ -9,7 +9,8 @@ final class KeyboardViewController: UIInputViewController {
         ["a/A"], ["'", "\"", "(", ")"], ["-", "~", "*", "%"],
     ]
     private static let shiftKey = 9
-    private static let punctuation = [".", ",", "?", ":", "!"]  // [tap, ←, ↑, →, ↓]: the rarely used colon sits on the hard-to-reach → at the screen edge
+    /// [tap, ←, ↑, →, ↓]. → is left empty: this key is at the screen edge. The colon is on the space key.
+    private static let punctuation = [".", ",", "?", "", "!"]
     private static let layerIcons = ["toki", "soweli", "poki"]
     private static let glyphsDefaultsKey = "showGlyphs"
 
@@ -192,13 +193,21 @@ final class KeyboardViewController: UIInputViewController {
         return key
     }
 
+    /// Tap: a space. Flick in any direction: a colon (as in "e ni:").
     private func spaceKey() -> FlickKey {
-        tapKey("", preview: (nil, "␣")) { [weak self] in self?.proxy.insertText(" ") }
+        sideKey("", preview: { i in (nil, i == 0 ? "␣" : ":") }, pick: { [weak self] i in
+            if i == 0 { self?.proxy.insertText(" ") } else { self?.insertPunctuation(":") }
+        })
     }
 
     private func punctuationKey() -> FlickKey {
         let p = Self.punctuation
-        let key = sideKey(p[0], preview: { i in (nil, p[i]) }, pick: { [weak self] i in self?.insertPunctuation(p[i]) })
+        let key = sideKey(p[0], preview: { i in
+            guard !p[i].isEmpty else { return nil }
+            return (nil, p[i])
+        }, pick: { [weak self] i in
+            if !p[i].isEmpty { self?.insertPunctuation(p[i]) }
+        })
         key.setLabels(main: p[0], edges: Array(p[1...]), font: Fonts.latin(size(20), bold: true), edgeFont: Fonts.latin(size(13)))
         return key
     }

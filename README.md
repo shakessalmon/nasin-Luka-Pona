@@ -25,7 +25,7 @@ The full layout is in [`data/layout.json`](data/layout.json): each key lists `[t
 Side columns (like the iOS Japanese keyboard):
 
 - Left: ABC (letters for names) · layer 2 · layer 3 · next keyboard
-- Right: ⌫ (tap = one letter, flick = one word) · space · punctuation (tap `.`, ← `,`, ↑ `?`, ↓ `!`, → `:`) · return
+- Right: ⌫ (tap = one letter, flick = one word) · space (flick = `:`) · punctuation (tap `.`, ← `,`, ↑ `?`, ↓ `!`) · return
 
 ## iOS keyboard
 
