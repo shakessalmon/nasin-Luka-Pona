@@ -109,7 +109,7 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
 
   <section class="notes">
     <div>Directions follow the glyphs. mi points down, sina points up and ona points left, so you flick that way. pona (∪) is up and ike (∩) is down; lili and suli sit on opposite sides. In the Position key, insa (dot inside) is the tap, sinpin (dot in front) is right, monsi (dot behind) is left, anpa is down. tan (where you come from) is left and tawa (where you go) is right.</div>
-    <div>Right column: ⌫ tap deletes a letter, a flick in any direction deletes a word · space (the blank key) · punctuation (tap “.”, ← “,”, ↑ “?”, → “!”, ↓ “:”) · ⏎ return. Left column: ABC letters · layer 2 (soweli) · layer 3 (poki) · next keyboard. While layer 2 or 3 is open, its key shows toki and takes you back to layer 1.</div>
+    <div>Right column: ⌫ tap deletes a letter, a flick in any direction deletes a word · space (the blank key) · punctuation (tap “.”, ← “,”, ↑ “?”, ↓ “!”, → “:”) · ⏎ return. Left column: ABC letters · layer 2 (soweli) · layer 3 (poki) · next keyboard. While layer 2 or 3 is open, its key shows toki and takes you back to layer 1.</div>
     <div>Layer 1 holds 57 words that cover about 87% of the words in real toki pona text. Empty slots on layers 2 and 3 are left for new words (nimisin) or your own picks.</div>
     <div>Sources: words and glyph codepoints from <a href="https://github.com/lipu-linku/sona" target="_blank" rel="noopener">lipu Linku</a> (CC BY-SA 4.0) · word frequency from <a href="https://sona.pona.la/wiki/Word_frequency" target="_blank" rel="noopener">sona pona wiki</a> (ilo Muni) · font <a href="https://github.com/ETBCOR/nasin-nanpa" target="_blank" rel="noopener">nasin nanpa</a> by jan Itan (MIT License).</div>
   </section>
@@ -126,7 +126,7 @@ const ABC = [
 ];
 const NAMES = ["Layer 1 · Common words", "Layer 2 · Nature, body, people", "Layer 3 · Position, objects", "ABC · Letters"];
 const DIRNAME = ["tap","←","↑","→","↓"];
-const PUNCT = [".", ",", "?", "!", ":"];
+const PUNCT = [".", ",", "?", ":", "!"];  // [tap, ←, ↑, →, ↓]: the rarely used colon sits on the hard-to-reach → at the screen edge
 let mode = 0, labelSp = true;   // mode 0,1,2 = word layers, 3 = ABC
 const $ = id => document.getElementById(id);
 const txt = $("txt"), kb = $("kb");

@@ -9,7 +9,7 @@ final class KeyboardViewController: UIInputViewController {
         ["a/A"], ["'", "\"", "(", ")"], ["-", "~", "*", "%"],
     ]
     private static let shiftKey = 9
-    private static let punctuation = [".", ",", "?", "!", ":"]
+    private static let punctuation = [".", ",", "?", ":", "!"]  // [tap, ←, ↑, →, ↓]: the rarely used colon sits on the hard-to-reach → at the screen edge
     private static let layerIcons = ["toki", "soweli", "poki"]
     private static let glyphsDefaultsKey = "showGlyphs"
 
