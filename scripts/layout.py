@@ -8,11 +8,11 @@ L1 = [
  ("Negation & logic",["ala","anu","seme","taso","en"]),
  ("Language",        ["toki","nimi","sitelen","lipu","musi"]),
  ("Mind & will",     ["wile","ken","kama","sona","pilin"]),
- ("Actions",         ["pali","pana","jo","lukin","ante"]),
- ("Qualities",       ["wawa","lili","pona","suli","ike"]),
+ ("Actions",         ["pana","pali","jo","lukin","ante"]),
+ ("Qualities",       ["pona","lili","wawa","suli","ike"]),
  ("Numbers",         ["mute","wan","tu","ale","nanpa"]),
  ("Time & place",    ["tenpo","ma","tomo","nasin",""]),
- ("Things & life",   ["ijo","ilo","moku","lape",""]),
+ ("Things & life",   ["lape","ilo","moku","ijo",""]),
  ("Interjections",   ["a","n","mu","kin",""]),
 ]
 L2 = [
@@ -26,7 +26,7 @@ L2 = [
  ("Feelings",        ["olin","suwi","monsuta","jaki","nasa"]),
  ("Surfaces & holes",["selo","","nena","","lupa"]),
  ("Sound",           ["kalama","kute","","",""]),
- ("Life & death",    ["unpa","moli","misikeke","",""]),
+ ("Life & death",    ["moli","unpa","misikeke","",""]),
  ("Heat",            ["seli","","","","lete"]),
 ]
 L3 = [
@@ -35,7 +35,7 @@ L3 = [
  ("Conflict",        ["utala","alasa","pakala","kipisi",""]),
  ("Objects",         ["len","palisa","","supa",""]),
  ("Shapes",          ["sike","leko","linja","",""]),
- ("Money",           ["mani","esun","","",""]),
+ ("Money",           ["esun","mani","","",""]),
  ("New & extra",     ["sin","namako","","",""]),
  ("Books",           ["pu","ku","","",""]),
  ("",                ["","","","",""]),

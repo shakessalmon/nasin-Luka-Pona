@@ -62,6 +62,7 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
 .key.side .lw { display: block; font-size: 0.85rem; }
 .key.side.punc .c { font-size: 1.2rem; }
 .key.side.punc .d { font-size: 0.85rem; font-family: var(--sans); }
+.key.side.punc .sp-word { font-size: 0.6rem; }
 .key.side small { display: block; font-size: 0.6rem; color: var(--muted); font-weight: 400; }
 .key.pressed { background: var(--accent-soft); }
 .pop { position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translateX(-50%); background: var(--hot); color: var(--hot-fg);
@@ -108,22 +109,25 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
   <section class="legend" id="legend"></section>
 
   <section class="notes">
-    <div>Directions follow the glyphs. mi points down, sina points up and ona points left, so you flick that way. pona (∪) is up and ike (∩) is down; lili and suli sit on opposite sides. In the Position key, insa (dot inside) is the tap, sinpin (dot in front) is right, monsi (dot behind) is left, anpa is down. tan (where you come from) is left and tawa (where you go) is right.</div>
-    <div>Right column: ⌫ tap deletes a letter, a flick in any direction deletes a word · space (the blank key; flick it for “:”) · punctuation (tap “.”, ← “,”, ↑ “?”, ↓ “!”) · ⏎ return. Left column: ABC letters · layer 2 (soweli) · layer 3 (poki) · next keyboard. While layer 2 or 3 is open, its key shows toki and takes you back to layer 1.</div>
+    <div>Directions follow the glyphs. mi points down, sina points up and ona points left, so you flick that way. pona is the tap on its key and ike (∩) is down; lili and suli sit on opposite sides. In the Position key, insa (dot inside) is the tap, sinpin (dot in front) is right, monsi (dot behind) is left, anpa is down. tan (where you come from) is left and tawa (where you go) is right.</div>
+    <div>Right column: ⌫ tap deletes a letter, a flick in any direction deletes a word · space (flick it in any direction for “:”) · punctuation (tap “.”, ← “,”, ↑ “?”, ↓ “!”) · ⏎ return. Left column: ABC letters · layer 2 (soweli) · layer 3 (poki) · next keyboard. While layer 2 or 3 is open, its key shows toki and takes you back to layer 1.</div>
     <div>Layer 1 holds 57 words that cover about 87% of the words in real toki pona text. Empty slots on layers 2 and 3 are left for new words (nimisin) or your own picks.</div>
     <div>Sources: words and glyph codepoints from <a href="https://github.com/lipu-linku/sona" target="_blank" rel="noopener">lipu Linku</a> (CC BY-SA 4.0) · word frequency from <a href="https://sona.pona.la/wiki/Word_frequency" target="_blank" rel="noopener">sona pona wiki</a> (ilo Muni) · font <a href="https://github.com/ETBCOR/nasin-nanpa" target="_blank" rel="noopener">nasin nanpa</a> by jan Itan (MIT License).</div>
   </section>
 </div>
 
 <script>
-const LAYOUT = [[{"g": "Pronouns", "w": ["ni", "ona", "sina", "jan", "mi"]}, {"g": "Grammar", "w": ["li", "la", "o", "e", "pi"]}, {"g": "Prepositions", "w": ["lon", "tan", "sama", "tawa", "kepeken"]}, {"g": "Negation & logic", "w": ["ala", "anu", "seme", "taso", "en"]}, {"g": "Language", "w": ["toki", "nimi", "sitelen", "lipu", "musi"]}, {"g": "Mind & will", "w": ["wile", "ken", "kama", "sona", "pilin"]}, {"g": "Actions", "w": ["pali", "pana", "jo", "lukin", "ante"]}, {"g": "Qualities", "w": ["wawa", "lili", "pona", "suli", "ike"]}, {"g": "Numbers", "w": ["mute", "wan", "tu", "ale", "nanpa"]}, {"g": "Time & place", "w": ["tenpo", "ma", "tomo", "nasin", ""]}, {"g": "Things & life", "w": ["ijo", "ilo", "moku", "lape", ""]}, {"g": "Interjections", "w": ["a", "n", "mu", "kin", ""]}], [{"g": "Animals", "w": ["soweli", "kala", "waso", "pipi", "akesi"]}, {"g": "Plants & food", "w": ["kasi", "kili", "pan", "soko", "kijetesantakalu"]}, {"g": "Sky & light", "w": ["suno", "mun", "sewi", "pimeja", ""]}, {"g": "Matter", "w": ["telo", "ko", "kon", "kiwen", ""]}, {"g": "Colors", "w": ["kule", "loje", "jelo", "laso", "walo"]}, {"g": "Body", "w": ["sijelo", "uta", "lawa", "luka", "noka"]}, {"g": "People", "w": ["kulupu", "mama", "meli", "mije", "tonsi"]}, {"g": "Feelings", "w": ["olin", "suwi", "monsuta", "jaki", "nasa"]}, {"g": "Surfaces & holes", "w": ["selo", "", "nena", "", "lupa"]}, {"g": "Sound", "w": ["kalama", "kute", "", "", ""]}, {"g": "Life & death", "w": ["unpa", "moli", "misikeke", "", ""]}, {"g": "Heat", "w": ["seli", "", "", "", "lete"]}], [{"g": "Position", "w": ["insa", "monsi", "poka", "sinpin", "anpa"]}, {"g": "Box, open & close", "w": ["poki", "open", "awen", "pini", "weka"]}, {"g": "Conflict", "w": ["utala", "alasa", "pakala", "kipisi", ""]}, {"g": "Objects", "w": ["len", "palisa", "", "supa", ""]}, {"g": "Shapes", "w": ["sike", "leko", "linja", "", ""]}, {"g": "Money", "w": ["mani", "esun", "", "", ""]}, {"g": "New & extra", "w": ["sin", "namako", "", "", ""]}, {"g": "Books", "w": ["pu", "ku", "", "", ""]}, {"g": "", "w": ["", "", "", "", ""]}, {"g": "", "w": ["", "", "", "", ""]}, {"g": "", "w": ["", "", "", "", ""]}, {"g": "", "w": ["", "", "", "", ""]}]];
+const LAYOUT = [[{"g": "Pronouns", "w": ["ni", "ona", "sina", "jan", "mi"]}, {"g": "Grammar", "w": ["li", "la", "o", "e", "pi"]}, {"g": "Prepositions", "w": ["lon", "tan", "sama", "tawa", "kepeken"]}, {"g": "Negation & logic", "w": ["ala", "anu", "seme", "taso", "en"]}, {"g": "Language", "w": ["toki", "nimi", "sitelen", "lipu", "musi"]}, {"g": "Mind & will", "w": ["wile", "ken", "kama", "sona", "pilin"]}, {"g": "Actions", "w": ["pana", "pali", "jo", "lukin", "ante"]}, {"g": "Qualities", "w": ["pona", "lili", "wawa", "suli", "ike"]}, {"g": "Numbers", "w": ["mute", "wan", "tu", "ale", "nanpa"]}, {"g": "Time & place", "w": ["tenpo", "ma", "tomo", "nasin", ""]}, {"g": "Things & life", "w": ["lape", "ilo", "moku", "ijo", ""]}, {"g": "Interjections", "w": ["a", "n", "mu", "kin", ""]}], [{"g": "Animals", "w": ["soweli", "kala", "waso", "pipi", "akesi"]}, {"g": "Plants & food", "w": ["kasi", "kili", "pan", "soko", "kijetesantakalu"]}, {"g": "Sky & light", "w": ["suno", "mun", "sewi", "pimeja", ""]}, {"g": "Matter", "w": ["telo", "ko", "kon", "kiwen", ""]}, {"g": "Colors", "w": ["kule", "loje", "jelo", "laso", "walo"]}, {"g": "Body", "w": ["sijelo", "uta", "lawa", "luka", "noka"]}, {"g": "People", "w": ["kulupu", "mama", "meli", "mije", "tonsi"]}, {"g": "Feelings", "w": ["olin", "suwi", "monsuta", "jaki", "nasa"]}, {"g": "Surfaces & holes", "w": ["selo", "", "nena", "", "lupa"]}, {"g": "Sound", "w": ["kalama", "kute", "", "", ""]}, {"g": "Life & death", "w": ["moli", "unpa", "misikeke", "", ""]}, {"g": "Heat", "w": ["seli", "", "", "", "lete"]}], [{"g": "Position", "w": ["insa", "monsi", "poka", "sinpin", "anpa"]}, {"g": "Box, open & close", "w": ["poki", "open", "awen", "pini", "weka"]}, {"g": "Conflict", "w": ["utala", "alasa", "pakala", "kipisi", ""]}, {"g": "Objects", "w": ["len", "palisa", "", "supa", ""]}, {"g": "Shapes", "w": ["sike", "leko", "linja", "", ""]}, {"g": "Money", "w": ["esun", "mani", "", "", ""]}, {"g": "New & extra", "w": ["sin", "namako", "", "", ""]}, {"g": "Books", "w": ["pu", "ku", "", "", ""]}, {"g": "", "w": ["", "", "", "", ""]}, {"g": "", "w": ["", "", "", "", ""]}, {"g": "", "w": ["", "", "", "", ""]}, {"g": "", "w": ["", "", "", "", ""]}]];
 const UCSUR = {"li": "U+F1927", "mi": "U+F1934", "e": "U+F1909", "a": "U+F1900", "pona": "U+F1954", "toki": "U+F196C", "ni": "U+F1941", "la": "U+F1921", "lon": "U+F192C", "ala": "U+F1902", "sina": "U+F195E", "jan": "U+F1911", "o": "U+F1944", "tawa": "U+F1969", "pi": "U+F194D", "sona": "U+F1961", "ona": "U+F1946", "mute": "U+F193C", "kama": "U+F1916", "tenpo": "U+F196B", "ken": "U+F1918", "seme": "U+F1959", "wile": "U+F1977", "taso": "U+F1968", "nimi": "U+F1942", "tan": "U+F1967", "pilin": "U+F194E", "ma": "U+F1930", "ale": "U+F1904", "musi": "U+F193B", "ike": "U+F190D", "lili": "U+F1928", "pali": "U+F1949", "sitelen": "U+F1960", "kepeken": "U+F1919", "ilo": "U+F190E", "tomo": "U+F196D", "lukin": "U+F192E", "moku": "U+F1936", "ante": "U+F1906", "ijo": "U+F190C", "suli": "U+F1963", "mu": "U+F1939", "sama": "U+F1956", "tu": "U+F196E", "nasin": "U+F193F", "anu": "U+F1907", "pana": "U+F194C", "soweli": "U+F1962", "jo": "U+F1913", "wan": "U+F1973", "wawa": "U+F1975", "kin": "U+F1979", "lape": "U+F1922", "n": "U+F1986", "sin": "U+F195D", "lipu": "U+F192A", "telo": "U+F196A", "nasa": "U+F193E", "pini": "U+F1950", "nanpa": "U+F193D", "lawa": "U+F1924", "kalama": "U+F1915", "kulupu": "U+F191F", "luka": "U+F192D", "pakala": "U+F1948", "suno": "U+F1964", "en": "U+F190A", "weka": "U+F1976", "awen": "U+F1908", "sewi": "U+F195A", "suwi": "U+F1966", "kon": "U+F191D", "sike": "U+F195C", "poka": "U+F1952", "olin": "U+F1945", "kasi": "U+F1917", "mama": "U+F1931", "moli": "U+F1937", "waso": "U+F1974", "kute": "U+F1920", "insa": "U+F190F", "utala": "U+F1971", "kili": "U+F191A", "poki": "U+F1953", "len": "U+F1925", "seli": "U+F1957", "kala": "U+F1914", "open": "U+F1947", "kiwen": "U+F191B", "pu": "U+F1955", "linja": "U+F1929", "pimeja": "U+F194F", "alasa": "U+F1903", "mani": "U+F1932", "mun": "U+F193A", "ko": "U+F191C", "pipi": "U+F1951", "uta": "U+F1970", "sijelo": "U+F195B", "kule": "U+F191E", "pan": "U+F194B", "unpa": "U+F196F", "meli": "U+F1933", "jaki": "U+F1910", "anpa": "U+F1905", "kijetesantakalu": "U+F1980", "esun": "U+F190B", "akesi": "U+F1901", "loje": "U+F192B", "monsuta": "U+F197D", "palisa": "U+F194A", "supa": "U+F1965", "lete": "U+F1926", "mije": "U+F1935", "noka": "U+F1943", "laso": "U+F1923", "tonsi": "U+F197E", "walo": "U+F1972", "nena": "U+F1940", "jelo": "U+F1912", "sinpin": "U+F195F", "ku": "U+F1988", "lupa": "U+F192F", "selo": "U+F1958", "leko": "U+F197C", "namako": "U+F1978", "kipisi": "U+F197B", "monsi": "U+F1938", "soko": "U+F1981", "misikeke": "U+F1987"};
+// sronhatie (Thumb-Key's English layout) with 4-way flicks: the 9 most common letters are taps,
+// the others are flicks toward the middle key, and h keeps the letters around it
 const ABC = [
-  {g:"Symbols", w:["@","#","/","&","_"]}, {g:"", w:["a","b","c","",""]}, {g:"", w:["d","e","f","",""]},
-  {g:"", w:["g","h","i","",""]}, {g:"", w:["j","k","l","",""]}, {g:"", w:["m","n","o","",""]},
-  {g:"", w:["p","q","r","s",""]}, {g:"", w:["t","u","v","",""]}, {g:"", w:["w","x","y","z",""]},
-  {g:"", w:["a/A","","","",""], shift:true}, {g:"", w:["'","\"","(",")",""]}, {g:"", w:["-","~","*","%",""]},
+  {g:"", w:["s","","","w","j"]}, {g:"", w:["r","","","","g"]}, {g:"", w:["o","u","","","b"]},
+  {g:"", w:["n","","","m",""]}, {g:"", w:["h","k","q","p","x"]}, {g:"", w:["a","l","","",""]},
+  {g:"", w:["t","","v","c",""]}, {g:"", w:["i","","f","z",""]}, {g:"", w:["e","d","y","",""]},
+  {g:"", w:["a/A","-","~","*","%"]}, {g:"", w:["'","\"","(",")",""]}, {g:"", w:["@","#","/","&","_"]},
 ];
+const SHIFT = "a/A";
 const NAMES = ["Layer 1 · Common words", "Layer 2 · Nature, body, people", "Layer 3 · Position, objects", "ABC · Letters"];
 const DIRNAME = ["tap","←","↑","→","↓"];
 const PUNCT = [".", ",", "?", "", "!"];  // [tap, ←, ↑, →, ↓]; → is left empty at the screen edge, the colon is on the space key
@@ -192,14 +196,21 @@ function sideKey(label, sub, slots, onPick, pop, active, aria){
   return b;
 }
 const go = m => { mode = m; build(); };
-function puncKey(){
+// a side key that shows what it types: the tap in the middle, the flicks around it
+function symbolKey(faces, slots, onPick, pop, aria){
   const b = document.createElement("button");
   b.className = "key side punc"; b.type = "button";
-  b.setAttribute("aria-label", "Punctuation: tap for period, flick left for comma, up for question mark, down for exclamation mark");
-  b.innerHTML = `<span class="c">${PUNCT[0]}</span>` + ["pl","pu","pr","pd"].map((d, j) => `<span class="d ${d}">${PUNCT[j+1]}</span>`).join("");
-  attachFlick(b, PUNCT, insertPunct, textPop);
+  b.setAttribute("aria-label", aria);
+  b.innerHTML = `<span class="c">${faces[0]}</span>` + ["pl","pu","pr","pd"].map((d, j) => `<span class="d ${d}">${faces[j+1]}</span>`).join("");
+  attachFlick(b, slots, onPick, pop);
   return b;
 }
+const puncKey = () => symbolKey(PUNCT, PUNCT, insertPunct, textPop,
+  "Punctuation: tap for period, flick left for comma, up for question mark, down for exclamation mark");
+const SPACE = [" ", ":", ":", ":", ":"];
+// "space" in words: a ␣ sign would look like the poki glyph on the layer 3 key
+const spaceKey = () => symbolKey(['<span class="sp-word">space</span>', ...SPACE.slice(1)], SPACE, v => v === " " ? insertChar(" ") : insertPunct(":"),
+  v => textPop(v === " " ? "␣" : ":"), "Space: tap for a space, flick in any direction for a colon");
 const LAYER_ICON = ["toki", "soweli", "poki"];
 // a layer key shows that layer's icon word; while its layer is open it turns into the way back to layer 1
 function layerKey(n){
@@ -224,8 +235,7 @@ function build(){
   const right = [
     sideKey("⌫", "", ["c","w","w","w","w"], (v) => v === "c" ? delChar() : delWord(),
       (v) => textPop(v === "c" ? "1 letter" : "1 word"), false, "Delete: tap for a letter, flick for a word"),
-    sideKey("", "", [" ",":",":",":",":"], v => v === " " ? insertChar(" ") : insertPunct(":"),
-      v => textPop(v === " " ? "␣" : ":"), false, "Space: tap for a space, flick for a colon"),
+    spaceKey(),
     puncKey(),
     sideKey("⏎", "", one(1), () => put(txt.value.replace(/ +$/,"") + "\n")),
   ];
@@ -241,8 +251,7 @@ function build(){
     b.innerHTML = `<span class="c">${slots[0] ? lab(slots[0]) : ""}</span>` +
       ["pl","pu","pr","pd"].map((d, j) => slots[j+1] ? `<span class="d ${d}">${lab(slots[j+1])}</span>` : "").join("");
     if (word) attachFlick(b, slots, insertWord, wordPop);
-    else if (k.shift) attachFlick(b, slots, toggleCase, () => textPop("Aa"));
-    else attachFlick(b, slots, insertChar, textPop);
+    else attachFlick(b, slots, v => v === SHIFT ? toggleCase() : insertChar(v), v => textPop(v === SHIFT ? "Aa" : v));
     kb.appendChild(b);
     if (i % 3 === 2) kb.appendChild(right[(i - 2) / 3]);
   });
@@ -250,7 +259,7 @@ function build(){
 }
 
 function renderLegend(){
-  if (mode === 3){ $("legend").innerHTML = `<h2>ABC · Letters</h2><div class="lg-row"><span class="gn">How to use</span><span class="ws">Type names letter by letter. No space is added automatically. Tap a/A to switch the case of the last letter.</span></div>`; return; }
+  if (mode === 3){ $("legend").innerHTML = `<h2>ABC · Letters</h2><div class="lg-row"><span class="gn">How to use</span><span class="ws">Type names letter by letter. No space is added automatically. The letters follow the sronhatie layout of Thumb-Key: the nine most common letters are taps, and the others are flicks toward the middle key. Tap a/A to switch the case of the last letter.</span></div>`; return; }
   const keys = LAYOUT[mode].filter(k => k.g);
   let h = `<h2>${NAMES[mode]}</h2>`;
   for (const k of keys){

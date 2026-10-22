@@ -63,8 +63,8 @@
   {
    "g": "Actions",
    "w": [
-    "pali",
     "pana",
+    "pali",
     "jo",
     "lukin",
     "ante"
@@ -73,9 +73,9 @@
   {
    "g": "Qualities",
    "w": [
-    "wawa",
-    "lili",
     "pona",
+    "lili",
+    "wawa",
     "suli",
     "ike"
    ]
@@ -103,10 +103,10 @@
   {
    "g": "Things & life",
    "w": [
-    "ijo",
+    "lape",
     "ilo",
     "moku",
-    "lape",
+    "ijo",
     ""
    ]
   },
@@ -225,8 +225,8 @@
   {
    "g": "Life & death",
    "w": [
-    "unpa",
     "moli",
+    "unpa",
     "misikeke",
     "",
     ""
@@ -297,8 +297,8 @@
   {
    "g": "Money",
    "w": [
-    "mani",
     "esun",
+    "mani",
     "",
     "",
     ""

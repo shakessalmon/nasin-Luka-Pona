@@ -2,19 +2,22 @@ import UIKit
 
 /// The keyboard: a 3×4 flick pad of word keys with a side column on each edge, like the iOS Japanese 12-key pad.
 final class KeyboardViewController: UIInputViewController {
+    /// sronhatie (Thumb-Key's English layout) with 4-way flicks: the 9 most common letters are taps,
+    /// the others are flicks toward the middle key, and h keeps the letters around it.
     private static let abc: [[String]] = [
-        ["@", "#", "/", "&", "_"], ["a", "b", "c"], ["d", "e", "f"],
-        ["g", "h", "i"], ["j", "k", "l"], ["m", "n", "o"],
-        ["p", "q", "r", "s"], ["t", "u", "v"], ["w", "x", "y", "z"],
-        ["a/A"], ["'", "\"", "(", ")"], ["-", "~", "*", "%"],
+        ["s", "", "", "w", "j"], ["r", "", "", "", "g"], ["o", "u", "", "", "b"],
+        ["n", "", "", "m", ""], ["h", "k", "q", "p", "x"], ["a", "l", "", "", ""],
+        ["t", "", "v", "c", ""], ["i", "", "f", "z", ""], ["e", "d", "y", "", ""],
+        [KeyboardViewController.shift, "-", "~", "*", "%"], ["'", "\"", "(", ")", ""], ["@", "#", "/", "&", "_"],
     ]
-    private static let shiftKey = 9
+    /// The ABC slot that switches the case of the last letter
+    private static let shift = "a/A"
     /// [tap, ←, ↑, →, ↓]. → is left empty: this key is at the screen edge. The colon is on the space key.
     private static let punctuation = [".", ",", "?", "", "!"]
     private static let layerIcons = ["toki", "soweli", "poki"]
     private static let glyphsDefaultsKey = "showGlyphs"
 
-    private enum Kind { case word, letter, shift }
+    private enum Kind { case word, letter }
 
     /// 0, 1, 2 = word layers, 3 = ABC
     private var mode = 0
@@ -90,8 +93,7 @@ final class KeyboardViewController: UIInputViewController {
             keys.append(left[row])
             for col in 0..<3 {
                 let i = row * 3 + col
-                let kind: Kind = mode < 3 ? .word : (i == Self.shiftKey ? .shift : .letter)
-                keys.append(mainKey(groups.indices.contains(i) ? groups[i] : [], kind: kind))
+                keys.append(mainKey(groups.indices.contains(i) ? groups[i] : [], kind: mode < 3 ? .word : .letter))
             }
             keys.append(right[row])
         }
@@ -117,15 +119,14 @@ final class KeyboardViewController: UIInputViewController {
             guard !slots[i].isEmpty else { return nil }
             switch kind {
             case .word: return (KeyboardData.glyphs[slots[i]], slots[i])
-            case .letter: return (nil, slots[i])
-            case .shift: return (nil, "Aa")
+            case .letter: return (nil, slots[i] == Self.shift ? "Aa" : slots[i])
             }
         }, pick: { [weak self] i in
             guard let self, !slots[i].isEmpty else { return }
             switch kind {
             case .word: self.insertWord(slots[i])
-            case .letter: self.proxy.insertText(slots[i])
-            case .shift: self.toggleCase()
+            case .letter:
+                if slots[i] == Self.shift { self.toggleCase() } else { self.proxy.insertText(slots[i]) }
             }
         })
         return key
@@ -193,11 +194,14 @@ final class KeyboardViewController: UIInputViewController {
         return key
     }
 
-    /// Tap: a space. Flick in any direction: a colon (as in "e ni:").
+    /// Tap: a space. Flick in any direction: a colon (as in "e ni:"). The face shows both;
+    /// "space" is spelled out because a ␣ sign looks like the poki glyph on the layer 3 key.
     private func spaceKey() -> FlickKey {
-        sideKey("", preview: { i in (nil, i == 0 ? "␣" : ":") }, pick: { [weak self] i in
+        let key = sideKey("space", preview: { i in (nil, i == 0 ? "␣" : ":") }, pick: { [weak self] i in
             if i == 0 { self?.proxy.insertText(" ") } else { self?.insertPunctuation(":") }
         })
+        key.setLabels(main: "space", edges: Array(repeating: ":", count: 4), font: Fonts.latin(size(13), bold: true), edgeFont: Fonts.latin(size(13)))
+        return key
     }
 
     private func punctuationKey() -> FlickKey {

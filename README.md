@@ -6,7 +6,7 @@ One tap or one flick types one whole word.
 - **Tap** a key for the word in the middle; **flick** left, up, right or down for the words around it.
 - Related words share a key (pronouns, grammar particles, prepositions, colors, body parts…).
 - Where a sitelen pona glyph points somewhere, the word sits in that direction:
-  `mi` ↓, `sina` ↑, `ona` ←, `pona` ↑ / `ike` ↓, `lili` ← / `suli` →, `monsi` ← / `sinpin` →, `anpa` ↓.
+  `mi` ↓, `sina` ↑, `ona` ←, `ike` ↓ (`pona` is the tap on that key), `lili` ← / `suli` →, `monsi` ← / `sinpin` →, `anpa` ↓.
 - Keys show sitelen pona glyphs; the keyboard types Latin text (`toki `, with the space added for you).
 
 **Try the web prototype:** open `web/index.html` on a phone, or the GitHub Pages site: https://shakessalmon.github.io/nasin-Luka-Pona/web/.
@@ -24,7 +24,7 @@ The full layout is in [`data/layout.json`](data/layout.json): each key lists `[t
 
 Side columns (like the iOS Japanese keyboard):
 
-- Left: ABC (letters for names) · layer 2 · layer 3 · next keyboard
+- Left: ABC (letters for names, in the sronhatie layout from [Thumb-Key](https://github.com/dessalines/thumb-key)) · layer 2 · layer 3 · next keyboard
 - Right: ⌫ (tap = one letter, flick = one word) · space (flick = `:`) · punctuation (tap `.`, ← `,`, ↑ `?`, ↓ `!`) · return
 
 ## iOS keyboard
