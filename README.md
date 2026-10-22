@@ -9,7 +9,7 @@ One tap or one flick types one whole word.
   `mi` ↓, `sina` ↑, `ona` ←, `pona` ↑ / `ike` ↓, `lili` ← / `suli` →, `monsi` ← / `sinpin` →, `anpa` ↓.
 - Keys show sitelen pona glyphs; the keyboard types Latin text (`toki `, with the space added for you).
 
-**Try the web prototype:** open `web/index.html` on a phone, or the GitHub Pages site: https://shakessalmon.github.io/nasin-luka-pona/web/ (after Pages is enabled).
+**Try the web prototype:** open `web/index.html` on a phone, or the GitHub Pages site: https://shakessalmon.github.io/nasin-Luka-Pona/web/.
 
 ## Layers
 
