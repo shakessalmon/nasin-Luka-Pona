@@ -27,11 +27,33 @@ Side columns (like the iOS Japanese keyboard):
 - Left: ABC (letters for names) · layer 2 · layer 3 · next keyboard
 - Right: ⌫ (tap = one letter, flick = one word) · space · punctuation (tap `.`, ← `,`, ↑ `?`, → `!`, ↓ `:`) · return
 
+## iOS keyboard
+
+`ios/NasinLukaPona.xcodeproj` builds a small app and the keyboard extension inside it.
+The keyboard reads `data/layout.json` and `data/words.json` and uses `fonts/nasin-nanpa-subset.otf` for the glyphs, so it always matches the data files.
+It does not need Full Access.
+
+On the keyboard, tap 🌐 for the next keyboard, or flick it to switch the keys between glyphs and Latin letters.
+Hold ⌫ to keep deleting letters.
+
+### Install on your iPhone with a free Apple ID
+
+1. Open `ios/NasinLukaPona.xcodeproj` in Xcode.
+2. Xcode › Settings › Accounts: add your Apple ID.
+3. Select the project, then for **both** targets (NasinLukaPona and NasinLukaPonaKeyboard) open Signing & Capabilities and set Team to your Personal Team.
+   If Xcode says the bundle identifier is not available, change `com.shakessalmon.nasinlukapona` to your own in both targets (the keyboard's must start with the app's, followed by `.keyboard`).
+4. Connect the iPhone with a cable. On the iPhone, turn on Settings › Privacy & Security › Developer Mode (it appears after the iPhone has been connected to Xcode once) and restart.
+5. Choose the iPhone as the run destination and press Run.
+6. The first time, trust your certificate on the iPhone: Settings › General › VPN & Device Management.
+7. Settings › General › Keyboard › Keyboards › Add New Keyboard… › nasin Luka Pona.
+
+With a free Apple ID the app stops working after 7 days. Press Run in Xcode again to reinstall it.
+
 ## Roadmap
 
 - [x] Word list and frequency ranking
 - [x] Web prototype
-- [ ] iOS keyboard extension (Swift)
+- [x] iOS keyboard extension (Swift) — first version, needs testing on a device
 - [ ] Optional output of sitelen pona (UCSUR) instead of Latin text
 
 ## Repository layout
@@ -40,8 +62,9 @@ Side columns (like the iOS Japanese keyboard):
 web/index.html            web prototype (single file, font embedded)
 data/words.json           131 words: frequency rank, Linku category, UCSUR codepoint, English/Japanese glosses
 data/layout.json          the three layers
-fonts/                    subset of the nasin nanpa font + its license
-scripts/                  scripts used to build words.json and layout.json
+fonts/                    subset of the nasin nanpa font (.woff2 for the web, .otf for iOS) + its license
+ios/                      Xcode project: container app (App/) and keyboard extension (Keyboard/)
+scripts/                  scripts used to build words.json, layout.json and the font subsets
 ```
 
 ## Credits and licenses
