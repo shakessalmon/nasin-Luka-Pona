@@ -84,6 +84,9 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
 .guide .gc.cur { background: var(--hot); color: var(--hot-fg); border-color: var(--hot); }
 .guide .gc .pg { font-family: var(--sp); font-weight: 400; font-size: 1.45rem; line-height: 1; }
 .key.side.on.soft { background: var(--accent-soft); color: var(--accent); }
+.btn.icon { padding: 4px 8px; line-height: 0; }
+.btn.icon svg { width: 1.2rem; height: 1.2rem; }
+#snd[aria-pressed="true"] .off, #snd[aria-pressed="false"] .on { display: none; }
 .layer-tag { font-size: 0.78rem; color: var(--muted); display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
 .layer-tag b { color: var(--accent); }
 
@@ -113,7 +116,7 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
     <div class="row-btn">
       <button class="btn primary" id="copy">Copy</button>
       <button class="btn" id="clear">Clear</button>
-      <button class="btn" id="snd" aria-pressed="true">Sound on</button>
+      <button class="btn icon" id="snd" aria-pressed="true" aria-label="Key sound" title="Key sound"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="on" d="M16.5 8.5a5 5 0 0 1 0 7"/><path class="off" d="M16 9l5 6M21 9l-5 6"/></svg></button>
       <div class="seg" role="group" aria-label="Key labels">
         <button id="lab-sp" aria-pressed="true">Glyphs</button>
         <button id="lab-lat" aria-pressed="false">Latin</button>
@@ -332,7 +335,7 @@ function press(on, off){ on.setAttribute("aria-pressed","true"); off.setAttribut
 $("lab-sp").onclick = () => { labelSp = true; press($("lab-sp"), $("lab-lat")); build(); };
 $("lab-lat").onclick = () => { labelSp = false; press($("lab-lat"), $("lab-sp")); build(); };
 $("clear").onclick = () => { put(""); };
-$("snd").onclick = () => { sound = !sound; $("snd").setAttribute("aria-pressed", sound); $("snd").textContent = sound ? "Sound on" : "Sound off"; };
+$("snd").onclick = () => { sound = !sound; $("snd").setAttribute("aria-pressed", sound); };
 $("copy").onclick = () => {
   const fail = () => { txt.select(); $("status").textContent = "Text selected. Long-press to copy it."; };
   try { navigator.clipboard.writeText(txt.value).then(() => { $("status").textContent = "Copied"; }, fail); } catch (e) { fail(); }
