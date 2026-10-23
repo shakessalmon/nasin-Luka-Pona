@@ -1,5 +1,11 @@
 import UIKit
 
+/// The keyboard's root view. It lets the keys play the system keyboard click
+/// (heard when Keyboard Clicks is on in Settings › Sounds & Haptics).
+final class KeyboardInputView: UIInputView, UIInputViewAudioFeedback {
+    var enableInputClicksWhenVisible: Bool { true }
+}
+
 /// The keyboard: a 3×4 flick pad of word keys with a side column on each edge, like the iOS Japanese 12-key pad.
 final class KeyboardViewController: UIInputViewController {
     /// sronhatie (Thumb-Key's English layout) with 4-way flicks: the 9 most common letters are taps,
@@ -14,25 +20,36 @@ final class KeyboardViewController: UIInputViewController {
     private static let shift = "a/A"
     /// [tap, ←, ↑, →, ↓]. → is left empty: this key is at the screen edge. The colon is on the space key.
     private static let punctuation = [".", ",", "?", "", "!"]
+    private static let punctuationNames = ["Period", "Comma", "Question mark", "", "Exclamation mark"]
     private static let layerIcons = ["toki", "soweli", "poki"]
     private static let glyphsDefaultsKey = "showGlyphs"
 
     private enum Kind { case word, letter }
+    /// plain: a side key. soft: a layer open for one word. strong: a layer kept open, or ABC.
+    private enum Look { case plain, soft, strong }
 
     /// 0, 1, 2 = word layers, 3 = ABC
     private var mode = 0
+    /// false: layer 2 or 3 goes back to layer 1 after one word. true: it stays open.
+    private var layerLocked = false
     private var showGlyphs = UserDefaults.standard.object(forKey: KeyboardViewController.glyphsDefaultsKey) as? Bool ?? true {
         didSet { UserDefaults.standard.set(showGlyphs, forKey: Self.glyphsDefaultsKey) }
     }
     private var keys: [FlickKey] = []
     private weak var heldKey: FlickKey?
     private let bubble = PreviewBubble()
+    private let guide = FlickGuide()
+    private weak var guideKey: FlickKey?
     private var heightConstraint: NSLayoutConstraint?
     /// iPhone landscape: a lower keyboard with smaller labels
     private var compact = false
 
     private var proxy: UITextDocumentProxy { textDocumentProxy }
     private var before: String { proxy.documentContextBeforeInput ?? "" }
+
+    override func loadView() {
+        view = KeyboardInputView(frame: .zero, inputViewStyle: .keyboard)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +59,7 @@ final class KeyboardViewController: UIInputViewController {
         height.isActive = true
         heightConstraint = height
         view.addSubview(bubble)
+        view.addSubview(guide)
         rebuild()
     }
 
@@ -115,82 +133,102 @@ final class KeyboardViewController: UIInputViewController {
                           edgeFont: Fonts.latin(size(kind == .word ? 9 : 11)))
         }
         if !slots.contains(where: { !$0.isEmpty }) { key.alpha = 0.35 }
-        wire(key, preview: { i in
-            guard !slots[i].isEmpty else { return nil }
-            switch kind {
-            case .word: return (KeyboardData.glyphs[slots[i]], slots[i])
-            case .letter: return (nil, slots[i] == Self.shift ? "Aa" : slots[i])
-            }
-        }, pick: { [weak self] i in
+        let name = { (s: String) in s == Self.shift ? "Switch case" : s }
+        let pick: (Int) -> Void = { [weak self] i in
             guard let self, !slots[i].isEmpty else { return }
             switch kind {
-            case .word: self.insertWord(slots[i])
+            case .word:
+                self.insertWord(slots[i])
+                // layers 2 and 3 are for one word unless they were opened with a flick
+                if self.mode != 0 && !self.layerLocked { self.go(0) }
             case .letter:
-                if slots[i] == Self.shift { self.toggleCase() } else { self.proxy.insertText(slots[i]) }
+                if slots[i] == Self.shift { self.toggleCase() } else { self.insertLetter(slots[i]) }
             }
-        })
+        }
+        wire(key, guide: true, label: slots[0].isEmpty ? "Empty" : name(slots[0]),
+             actions: (1..<5).filter { !slots[$0].isEmpty }.map { ($0, name(slots[$0])) },
+             preview: { i in
+                 guard !slots[i].isEmpty else { return nil }
+                 switch kind {
+                 case .word: return (KeyboardData.glyphs[slots[i]], slots[i])
+                 case .letter: return (nil, slots[i] == Self.shift ? "Aa" : slots[i])
+                 }
+             }, pick: pick)
         return key
     }
 
-    private func sideKey(_ face: String, glyph: Bool = false, active: Bool = false,
+    private func sideKey(_ face: String, glyph: Bool = false, look: Look = .plain, label: String, actions: [(Int, String)] = [],
                          preview: @escaping (Int) -> (String?, String)?, pick: @escaping (Int) -> Void) -> FlickKey {
-        let key = active
-            ? FlickKey(color: Palette.accent, pressedColor: Palette.pressed, textColor: Palette.onAccent)
-            : FlickKey(color: Palette.side, pressedColor: Palette.key)
+        let key: FlickKey
+        switch look {
+        case .plain: key = FlickKey(color: Palette.side, pressedColor: Palette.key)
+        case .soft: key = FlickKey(color: Palette.pressed, pressedColor: Palette.key, textColor: Palette.accent)
+        case .strong: key = FlickKey(color: Palette.accent, pressedColor: Palette.pressed, textColor: Palette.onAccent)
+        }
         key.setLabels(main: face, font: glyph ? Fonts.glyph(size(28)) : Fonts.latin(size(15), bold: true), glyph: glyph)
-        wire(key, preview: preview, pick: pick)
+        wire(key, guide: false, label: label, actions: actions, preview: preview, pick: pick)
         return key
     }
 
     /// A key that only does something on tap.
-    private func tapKey(_ face: String, glyph: Bool = false, active: Bool = false,
-                        preview: (String?, String), action: @escaping () -> Void) -> FlickKey {
-        sideKey(face, glyph: glyph, active: active, preview: { $0 == 0 ? preview : nil }, pick: { if $0 == 0 { action() } })
+    private func tapKey(_ face: String, label: String, preview: (String?, String), action: @escaping () -> Void) -> FlickKey {
+        sideKey(face, label: label, preview: { $0 == 0 ? preview : nil }, pick: { if $0 == 0 { action() } })
     }
 
     /// A layer key shows its layer's icon word; while that layer is open it becomes the way back to layer 1.
+    /// Tap: open the layer for one word. Flick: keep it open until the key is tapped again.
     private func layerKey(_ n: Int) -> FlickKey {
-        let active = mode == n
-        let word = Self.layerIcons[active ? 0 : n]
-        return wordFaceKey(word, active: active) { [weak self] in self?.go(active ? 0 : n) }
+        let open = mode == n, locked = open && layerLocked
+        let word = Self.layerIcons[open ? 0 : n]
+        let glyph = showGlyphs ? KeyboardData.glyphs[word] : nil
+        return sideKey(glyph ?? word, glyph: glyph != nil, look: open ? (locked ? .strong : .soft) : .plain,
+                       label: open ? "Back to layer 1" : "Layer \(n + 1) for one word",
+                       actions: locked ? [] : [(1, "Keep layer \(n + 1) open")],
+                       preview: { i in
+                           if i == 0 { return (KeyboardData.glyphs[word], word) }
+                           if locked { return nil }
+                           return (nil, "Keep open")
+                       }, pick: { [weak self] i in
+                           if i == 0 { self?.go(open ? 0 : n) } else if !locked { self?.go(n, locked: true) }
+                       })
     }
 
     private func backKey() -> FlickKey {
-        wordFaceKey("toki", active: true) { [weak self] in self?.go(0) }
-    }
-
-    private func wordFaceKey(_ word: String, active: Bool, action: @escaping () -> Void) -> FlickKey {
-        let glyph = showGlyphs ? KeyboardData.glyphs[word] : nil
-        return tapKey(glyph ?? word, glyph: glyph != nil, active: active,
-                      preview: (KeyboardData.glyphs[word], word), action: action)
+        let glyph = showGlyphs ? KeyboardData.glyphs["toki"] : nil
+        return sideKey(glyph ?? "toki", glyph: glyph != nil, look: .strong, label: "Back to layer 1",
+                       preview: { i in
+                           guard i == 0 else { return nil }
+                           return (KeyboardData.glyphs["toki"], "toki")
+                       },
+                       pick: { [weak self] i in if i == 0 { self?.go(0) } })
     }
 
     private func lettersKey() -> FlickKey {
-        tapKey("ABC", preview: (nil, "ABC")) { [weak self] in self?.go(3) }
+        tapKey("ABC", label: "Letters", preview: (nil, "ABC")) { [weak self] in self?.go(3) }
     }
 
     /// Tap: next keyboard. Flick: switch the key faces between glyphs and Latin letters.
     private func globeKey() -> FlickKey {
-        let key = sideKey("", preview: { [weak self] i in
-            guard let self else { return nil }
-            let label = i == 0 ? "Next keyboard" : (self.showGlyphs ? "Latin" : "Glyphs")
-            return (nil, label)
-        }, pick: { [weak self] i in
-            guard let self else { return }
-            if i == 0 {
-                self.advanceToNextInputMode()
-            } else {
-                self.showGlyphs.toggle()
-                self.rebuild()
-            }
-        })
+        let other = showGlyphs ? "Latin" : "Glyphs"
+        let key = sideKey("", label: "Next keyboard", actions: [(1, "Show \(other) on the keys")],
+                          preview: { i in (nil, i == 0 ? "Next keyboard" : other) },
+                          pick: { [weak self] i in
+                              guard let self else { return }
+                              if i == 0 {
+                                  self.advanceToNextInputMode()
+                              } else {
+                                  self.showGlyphs.toggle()
+                                  self.rebuild()
+                              }
+                          })
         // the system's monochrome globe, not the colored 🌐 emoji
         key.setIcon("globe", pointSize: size(20))
         return key
     }
 
     private func deleteKey() -> FlickKey {
-        let key = sideKey("⌫", preview: { i in (nil, i == 0 ? "1 letter" : "1 word") }, pick: { [weak self] i in
+        let key = sideKey("⌫", label: "Delete", actions: [(1, "Delete word")],
+                          preview: { i in (nil, i == 0 ? "1 letter" : "1 word") }, pick: { [weak self] i in
             if i == 0 { self?.proxy.deleteBackward() } else { self?.deleteWord() }
         })
         key.onRepeat = { [weak self] in self?.proxy.deleteBackward() }
@@ -200,7 +238,8 @@ final class KeyboardViewController: UIInputViewController {
     /// Tap: a space. Flick in any direction: a colon (as in "e ni:").
     /// Only the left colon is drawn to keep the key quiet.
     private func spaceKey() -> FlickKey {
-        let key = sideKey("␣", preview: { i in (nil, i == 0 ? "␣" : ":") }, pick: { [weak self] i in
+        let key = sideKey("␣", label: "Space", actions: [(1, "Colon")],
+                          preview: { i in (nil, i == 0 ? "␣" : ":") }, pick: { [weak self] i in
             if i == 0 { self?.proxy.insertText(" ") } else { self?.insertPunctuation(":") }
         })
         key.setLabels(main: "␣", edges: [":"], font: Fonts.latin(size(20), bold: true), edgeFont: Fonts.latin(size(13)))
@@ -209,34 +248,60 @@ final class KeyboardViewController: UIInputViewController {
 
     private func punctuationKey() -> FlickKey {
         let p = Self.punctuation
-        let key = sideKey(p[0], preview: { i in
-            guard !p[i].isEmpty else { return nil }
-            return (nil, p[i])
-        }, pick: { [weak self] i in
-            if !p[i].isEmpty { self?.insertPunctuation(p[i]) }
-        })
+        let key = sideKey(p[0], label: Self.punctuationNames[0],
+                          actions: (1..<5).filter { !p[$0].isEmpty }.map { ($0, Self.punctuationNames[$0]) },
+                          preview: { i in
+                              guard !p[i].isEmpty else { return nil }
+                              return (nil, p[i])
+                          }, pick: { [weak self] i in
+                              if !p[i].isEmpty { self?.insertPunctuation(p[i]) }
+                          })
         key.setLabels(main: p[0], edges: Array(p[1...]), font: Fonts.latin(size(20), bold: true), edgeFont: Fonts.latin(size(13)))
         return key
     }
 
     private func returnKey() -> FlickKey {
-        tapKey("⏎", preview: (nil, "⏎")) { [weak self] in
+        tapKey("⏎", label: "Return", preview: (nil, "⏎")) { [weak self] in
             self?.trimTrailingSpaces()
             self?.proxy.insertText("\n")
         }
     }
 
-    private func wire(_ key: FlickKey, preview: @escaping (Int) -> (String?, String)?, pick: @escaping (Int) -> Void) {
+    /// guide: while held, show all five slots as a cross (word and letter keys); otherwise a bubble with the current one.
+    /// label and actions are what VoiceOver reads: the tap, and one custom action per flick.
+    private func wire(_ key: FlickKey, guide useGuide: Bool, label: String, actions: [(Int, String)],
+                      preview: @escaping (Int) -> (String?, String)?, pick: @escaping (Int) -> Void) {
+        key.accessibilityLabel = label
+        key.accessibilityCustomActions = actions.map { slot, name in
+            UIAccessibilityCustomAction(name: name) { _ in
+                pick(slot)
+                return true
+            }
+        }
         key.onTouchDown = { [weak self] key in
+            UIDevice.current.playInputClick()
             // Touching a new key while another is still held types the held one first.
             if let held = self?.heldKey, held !== key { held.finish(commit: true) }
             self?.heldKey = key
         }
-        key.onHover = { [weak self] key, slot in self?.showBubble(over: key, slot: slot, content: preview(slot)) }
+        key.onHover = { [weak self] key, slot in
+            guard let self else { return }
+            if useGuide {
+                if self.guideKey !== key || self.guide.isHidden {
+                    self.guideKey = key
+                    self.guide.show(around: key.frame, within: self.view.bounds, contents: (0..<5).map(preview))
+                    self.view.bringSubviewToFront(self.guide)
+                }
+                self.guide.highlight(slot)
+            } else {
+                self.showBubble(over: key, slot: slot, content: preview(slot))
+            }
+        }
         key.onRelease = { [weak self] key in
             guard let self, self.heldKey === key else { return }
             self.heldKey = nil
             self.bubble.isHidden = true
+            self.guide.isHidden = true
         }
         key.onPick = pick
     }
@@ -255,8 +320,9 @@ final class KeyboardViewController: UIInputViewController {
         view.bringSubviewToFront(bubble)
     }
 
-    private func go(_ newMode: Int) {
+    private func go(_ newMode: Int, locked: Bool = false) {
         mode = newMode
+        layerLocked = locked
         rebuild()
     }
 
@@ -266,6 +332,13 @@ final class KeyboardViewController: UIInputViewController {
     private func insertWord(_ word: String) {
         let needsSpace = before.last.map { !$0.isWhitespace } ?? false
         proxy.insertText((needsSpace ? " " : "") + word + " ")
+    }
+
+    /// ABC: a letter that starts a word is capitalized, since names in toki pona always are (jan Sonja).
+    private func insertLetter(_ s: String) {
+        let startsWord = before.last.map { $0.isWhitespace } ?? true
+        let isLetter = s.count == 1 && s.first?.isLowercase == true
+        proxy.insertText(startsWord && isLetter ? s.uppercased() : s)
     }
 
     /// Punctuation goes right after the last word: drop the auto-inserted space, then add one after the mark.

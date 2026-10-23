@@ -53,6 +53,14 @@ final class FlickKey: UIView {
         iconView.contentMode = .center
         iconView.isUserInteractionEnabled = false
         addSubview(iconView)
+        isAccessibilityElement = true
+        accessibilityTraits = .keyboardKey
+    }
+
+    /// VoiceOver: a double tap types the tap slot; the flicks are offered as custom actions.
+    override func accessibilityActivate() -> Bool {
+        onPick?(0)
+        return true
     }
 
     /// Shows a monochrome SF Symbol in place of the main label.
@@ -162,22 +170,29 @@ final class PreviewBubble: UIView {
     private let glyphLabel = UILabel()
     private let textLabel = UILabel()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = Palette.accent
+    init(glyphSize: CGFloat = 28, textSize: CGFloat = 15) {
+        super.init(frame: .zero)
         layer.cornerRadius = 8
         isUserInteractionEnabled = false
         isHidden = true
         for label in [glyphLabel, textLabel] {
             label.textAlignment = .center
-            label.textColor = Palette.onAccent
             label.adjustsFontSizeToFitWidth = true
             label.minimumScaleFactor = 0.4
             addSubview(label)
         }
-        glyphLabel.font = Fonts.glyph(28)
-        textLabel.font = Fonts.latin(15, bold: true)
+        glyphLabel.font = Fonts.glyph(glyphSize)
+        textLabel.font = Fonts.latin(textSize, bold: true)
+        setHighlighted(true)
     }
+
+    /// Highlighted: filled with the accent color. Otherwise a light cell with an accent outline.
+    func setHighlighted(_ on: Bool) {
+        backgroundColor = on ? Palette.accent : Palette.key
+        layer.borderWidth = on ? 0 : 1
+        for label in [glyphLabel, textLabel] { label.textColor = on ? Palette.onAccent : Palette.text }
+    }
+
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
@@ -191,6 +206,8 @@ final class PreviewBubble: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        // a CGColor does not follow dark mode by itself
+        layer.borderColor = Palette.accent.resolvedColor(with: traitCollection).cgColor
         let inner = bounds.insetBy(dx: 4, dy: 2)
         if glyphLabel.isHidden {
             textLabel.frame = inner
@@ -200,5 +217,45 @@ final class PreviewBubble: UIView {
                                       width: inner.width, height: inner.height - textH)
             textLabel.frame = CGRect(x: inner.minX, y: inner.maxY - textH, width: inner.width, height: textH)
         }
+    }
+}
+
+/// While a key is held, its five words laid out as a cross; the one the finger is on is highlighted.
+final class FlickGuide: UIView {
+    private let cells = (0..<5).map { _ in PreviewBubble(glyphSize: 22, textSize: 12) }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        isUserInteractionEnabled = false
+        isHidden = true
+        cells.forEach { addSubview($0) }
+    }
+
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
+    /// contents: [tap, left, up, right, down]; nil leaves that cell out. The cross is centered on the key
+    /// and moved as little as needed to stay inside `area`.
+    func show(around key: CGRect, within area: CGRect, contents: [(String?, String)?]) {
+        let cell = CGSize(width: max(key.width, 60), height: max(key.height, 52))
+        let gap: CGFloat = 3
+        let size = CGSize(width: cell.width * 3 + gap * 2, height: cell.height * 3 + gap * 2)
+        let x = max(min(key.midX - size.width / 2, area.maxX - size.width), area.minX)
+        let y = max(min(key.midY - size.height / 2, area.maxY - size.height), area.minY)
+        frame = CGRect(x: x, y: y, width: size.width, height: size.height)
+        let grid: [(CGFloat, CGFloat)] = [(1, 1), (0, 1), (1, 0), (2, 1), (1, 2)]
+        for (i, c) in cells.enumerated() {
+            c.frame = CGRect(x: grid[i].0 * (cell.width + gap), y: grid[i].1 * (cell.height + gap),
+                             width: cell.width, height: cell.height)
+            if i < contents.count, let content = contents[i] {
+                c.show(glyph: content.0, text: content.1)
+            } else {
+                c.isHidden = true
+            }
+        }
+        isHidden = false
+    }
+
+    func highlight(_ slot: Int) {
+        for (i, c) in cells.enumerated() { c.setHighlighted(i == slot) }
     }
 }

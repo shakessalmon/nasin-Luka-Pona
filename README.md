@@ -4,6 +4,7 @@
 One tap or one flick types one whole word.
 
 - **Tap** a key for the word in the middle; **flick** left, up, right or down for the words around it.
+- While you hold a key, its words appear as a cross around it, and the one under your finger is highlighted.
 - Related words share a key (pronouns, grammar particles, prepositions, colors, body parts…).
 - Where a sitelen pona glyph points somewhere, the word sits in that direction:
   `mi` ↓, `sina` ↑, `ona` ←, `ike` ↓ (`pona` is the tap on that key), `lili` ← / `suli` →, `monsi` ← / `sinpin` →, `anpa` ↓.
@@ -24,8 +25,8 @@ The full layout is in [`data/layout.json`](data/layout.json): each key lists `[t
 
 Side columns (like the iOS Japanese keyboard):
 
-- Left: ABC (letters for names, in the sronhatie layout from [Thumb-Key](https://github.com/dessalines/thumb-key)) · layer 2 · layer 3 · next keyboard
-- Right: ⌫ (tap = one letter, flick = one word) · space (flick = `:`) · punctuation (tap `.`, ← `,`, ↑ `?`, ↓ `!`) · return
+- Left: ABC (letters for names, in the sronhatie layout from [Thumb-Key](https://github.com/dessalines/thumb-key); the first letter of a word is capitalized for you) · layer 2 · layer 3 (tap = one word, flick = keep the layer open) · next keyboard
+- Right: ⌫ (tap = one letter, hold = keep deleting, flick = one word) · space (flick = `:`) · punctuation (tap `.`, ← `,`, ↑ `?`, ↓ `!`) · return
 
 ## iOS keyboard
 
@@ -34,7 +35,7 @@ The keyboard reads `data/layout.json` and `data/words.json` and uses `fonts/nasi
 It does not need Full Access.
 
 On the keyboard, tap the globe key for the next keyboard, or flick it to switch the keys between glyphs and Latin letters.
-Hold ⌫ to keep deleting letters.
+Hold ⌫ to keep deleting letters. Keys click when Keyboard Clicks is on in Settings › Sounds & Haptics, and VoiceOver reads each key, with its flicks as actions.
 
 ### Install on your iPhone with a free Apple ID
 

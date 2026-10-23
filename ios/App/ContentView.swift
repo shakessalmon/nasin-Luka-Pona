@@ -27,6 +27,8 @@ struct ContentView: View {
                     Text("Tap a key for the word in the middle, or flick left, up, right or down for the words around it. A space is added after each word.")
                     Text("Most words sit in the direction their glyph points: mi ↓, sina ↑, ona ←, ike ↓, lili ← / suli →.")
                     Text("Left column: ABC letters · layer 2 · layer 3 · \(Image(systemName: "globe")). Tap \(Image(systemName: "globe")) for the next keyboard; flick it to switch the keys between glyphs and Latin letters.")
+                    Text("Tap layer 2 or 3 to type one word from it; flick the key instead to keep the layer open.")
+                    Text("In ABC, a letter at the start of a word is capitalized for you, since names are. Tap a/A to switch the case of the last letter.")
                     Text("Right column: ⌫ (tap for a letter, flick for a word, hold to repeat) · space (flick for :) · punctuation (tap . ← , ↑ ? ↓ !) · return.")
                 }
             }

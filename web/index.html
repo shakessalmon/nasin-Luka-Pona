@@ -75,6 +75,15 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
 .pop { position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translateX(-50%); background: var(--hot); color: var(--hot-fg);
   border-radius: 8px; padding: 6px 10px; font-weight: 700; font-size: 1rem; white-space: nowrap; pointer-events: none; z-index: 5; display: grid; justify-items: center; gap: 2px; }
 .pop .pg { font-family: var(--sp); font-weight: 400; font-size: 1.8rem; line-height: 1; }
+/* flick guide: while a word or letter key is held, its five slots form a cross around it */
+.key.pressed { z-index: 4; }
+.guide { position: absolute; left: -100%; top: -100%; width: 300%; height: 300%; display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(0, 1fr)); gap: 3px; pointer-events: none; z-index: 5; }
+.guide .gc { display: grid; place-items: center; align-content: center; gap: 1px; min-width: 0; background: var(--surface); color: var(--fg);
+  border: 1px solid var(--accent); border-radius: 8px; font-weight: 700; font-size: 0.8rem; box-shadow: 0 2px 6px rgba(0,0,0,.18); white-space: nowrap; overflow: hidden; }
+.guide .gc.cur { background: var(--hot); color: var(--hot-fg); border-color: var(--hot); }
+.guide .gc .pg { font-family: var(--sp); font-weight: 400; font-size: 1.45rem; line-height: 1; }
+.key.side.on.soft { background: var(--accent-soft); color: var(--accent); }
 .layer-tag { font-size: 0.78rem; color: var(--muted); display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
 .layer-tag b { color: var(--accent); }
 
@@ -104,6 +113,7 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
     <div class="row-btn">
       <button class="btn primary" id="copy">Copy</button>
       <button class="btn" id="clear">Clear</button>
+      <button class="btn" id="snd" aria-pressed="true">Sound on</button>
       <div class="seg" role="group" aria-label="Key labels">
         <button id="lab-sp" aria-pressed="true">Glyphs</button>
         <button id="lab-lat" aria-pressed="false">Latin</button>
@@ -119,7 +129,7 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
 
   <section class="notes">
     <div>Directions follow the glyphs. mi points down, sina points up and ona points left, so you flick that way. pona is the tap on its key and ike (∩) is down; lili and suli sit on opposite sides. In the Position key, insa (dot inside) is the tap, sinpin (dot in front) is right, monsi (dot behind) is left, anpa is down. tan (where you come from) is left and tawa (where you go) is right.</div>
-    <div>Right column: ⌫ tap deletes a letter, a flick in any direction deletes a word · space (flick it in any direction for “:”) · punctuation (tap “.”, ← “,”, ↑ “?”, ↓ “!”) · ⏎ return. Left column: ABC letters · layer 2 (soweli) · layer 3 (poki) · next keyboard. While layer 2 or 3 is open, its key shows toki and takes you back to layer 1.</div>
+    <div>Right column: ⌫ tap deletes a letter (hold to keep deleting), a flick in any direction deletes a word · space (flick it in any direction for “:”) · punctuation (tap “.”, ← “,”, ↑ “?”, ↓ “!”) · ⏎ return. Left column: ABC letters · layer 2 (soweli) · layer 3 (poki) · next keyboard. Tap layer 2 or 3 to type one word from it, then you are back on layer 1; flick the key instead to keep the layer open. While layer 2 or 3 is open, its key shows toki and takes you back to layer 1.</div>
     <div>Layer 1 holds 57 words that cover about 87% of the words in real toki pona text. Empty slots on layers 2 and 3 are left for new words (nimisin) or your own picks.</div>
     <div>Sources: words and glyph codepoints from <a href="https://github.com/lipu-linku/sona" target="_blank" rel="noopener">lipu Linku</a> (CC BY-SA 4.0) · word frequency from <a href="https://sona.pona.la/wiki/Word_frequency" target="_blank" rel="noopener">sona pona wiki</a> (ilo Muni) · font <a href="https://github.com/ETBCOR/nasin-nanpa" target="_blank" rel="noopener">nasin nanpa</a> by jan Itan (MIT License).</div>
   </section>
@@ -141,6 +151,8 @@ const NAMES = ["Layer 1 · Common words", "Layer 2 · Nature, body, people", "La
 const DIRNAME = ["tap","←","↑","→","↓"];
 const PUNCT = [".", ",", "?", "", "!"];  // [tap, ←, ↑, →, ↓]; → is left empty at the screen edge, the colon is on the space key
 let mode = 0, labelSp = true;   // mode 0,1,2 = word layers, 3 = ABC
+let layerLock = false;           // false: layer 2 or 3 goes back to layer 1 after one word
+let sound = true, actx = null;
 const $ = id => document.getElementById(id);
 const txt = $("txt"), kb = $("kb");
 const g = w => UCSUR[w] ? String.fromCodePoint(parseInt(UCSUR[w].slice(2),16)) : "";
@@ -153,6 +165,8 @@ function put(v){ txt.value = v; refresh(); }
 
 function insertWord(w){ let v = txt.value; if (v && !/\s$/.test(v)) v += " "; put(v + w + " "); }
 function insertChar(c){ put(txt.value + c); }
+// ABC: a letter that starts a word is capitalized, since names in toki pona always are (jan Sonja)
+function insertLetter(c){ insertChar(/^[a-z]$/.test(c) && /(^|\s)$/.test(txt.value) ? c.toUpperCase() : c); }
 function insertPunct(p){ put(txt.value.replace(/ +$/, "") + p + " "); }
 function delChar(){ put(txt.value.slice(0, -1)); }
 function delWord(){ put(txt.value.replace(/\s+$/, "").replace(/\S+$/, "")); }
@@ -167,26 +181,53 @@ function dirOf(dx, dy){
   return Math.abs(dx) > Math.abs(dy) ? (dx < 0 ? 1 : 3) : (dy < 0 ? 2 : 4);
 }
 
+// a short tick, like a key click; "ambient" lets the phone's silent switch mute it
+function click(){
+  if (!sound) return;
+  try {
+    if (navigator.audioSession) navigator.audioSession.type = "ambient";
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    const t = actx.currentTime, o = actx.createOscillator(), v = actx.createGain();
+    o.type = "triangle"; o.frequency.value = 1500;
+    v.gain.setValueAtTime(0.08, t); v.gain.exponentialRampToValueAtTime(0.0001, t + 0.03);
+    o.connect(v).connect(actx.destination); o.start(t); o.stop(t + 0.04);
+  } catch (e) {}
+}
+
+const CROSS = [[2, 2], [2, 1], [1, 2], [2, 3], [3, 2]];   // [row, column] of tap, ←, ↑, →, ↓
 // slots: 5 values; onPick(value, dir)
-function attachFlick(el, slots, onPick, popLabel){
-  let sx, sy, cur = -1, pop = null, id = null;
+// opts.guide: show all five slots as a cross while held; opts.repeat: run it again and again while held still
+function attachFlick(el, slots, onPick, popLabel, opts = {}){
+  let sx, sy, cur = -1, pop = null, id = null, timer = null, repeating = false;
   const show = i => {
+    if (opts.guide){
+      if (!pop){
+        pop = document.createElement("div"); pop.className = "guide";
+        pop.innerHTML = slots.map((s, j) => s ? `<div class="gc" data-i="${j}" style="grid-row:${CROSS[j][0]};grid-column:${CROSS[j][1]}">${popLabel(s, j)}</div>` : "").join("");
+        el.appendChild(pop);
+      }
+      pop.querySelectorAll(".gc").forEach(c => c.classList.toggle("cur", +c.dataset.i === i));
+      return;
+    }
     if (!pop){ pop = document.createElement("div"); pop.className = "pop"; el.appendChild(pop); }
     pop.innerHTML = slots[i] ? popLabel(slots[i], i) : "—";
   };
+  const stopRepeat = () => { clearTimeout(timer); clearInterval(timer); timer = null; };
   el.addEventListener("pointerdown", e => {
     e.preventDefault(); id = e.pointerId; el.setPointerCapture(id);
-    sx = e.clientX; sy = e.clientY; cur = 0; el.classList.add("pressed"); show(0);
+    sx = e.clientX; sy = e.clientY; cur = 0; repeating = false; el.classList.add("pressed"); show(0); click();
+    if (opts.repeat) timer = setTimeout(() => { repeating = true; opts.repeat(); timer = setInterval(opts.repeat, 80); }, 450);
   });
   el.addEventListener("pointermove", e => {
-    if (e.pointerId !== id) return;
+    if (e.pointerId !== id || repeating) return;
     const d = dirOf(e.clientX - sx, e.clientY - sy);
-    if (d !== cur){ cur = d; show(d); }
+    if (d !== cur){ cur = d; show(d); if (d) stopRepeat(); }
   });
   const end = commit => e => {
     if (e.pointerId !== id) return;
+    stopRepeat();
     el.classList.remove("pressed"); if (pop){ pop.remove(); pop = null; }
-    if (commit && slots[cur]) onPick(slots[cur], cur);
+    if (commit && !repeating && slots[cur]) onPick(slots[cur], cur);
     id = null;
   };
   el.addEventListener("pointerup", end(true));
@@ -196,15 +237,15 @@ function attachFlick(el, slots, onPick, popLabel){
 const wordPop = w => `<span class="pg">${g(w)}</span><span>${w}</span>`;
 const textPop = s => `<span>${s}</span>`;
 
-function sideKey(label, sub, slots, onPick, pop, active, aria){
+function sideKey(label, sub, slots, onPick, pop, active, aria, opts){
   const b = document.createElement("button");
   b.className = "key side" + (active ? " on" : ""); b.type = "button";
   b.innerHTML = `${label}${sub ? `<small>${sub}</small>` : ""}`;
   b.setAttribute("aria-label", aria || (label + (sub ? " " + sub : "")));
-  attachFlick(b, slots, onPick, pop || (() => textPop(label)));
+  attachFlick(b, slots, onPick, pop || (() => textPop(label)), opts);
   return b;
 }
-const go = m => { mode = m; build(); };
+const go = (m, locked = false) => { mode = m; layerLock = locked; build(); };
 // a side key that shows what it types: the tap in the middle, the flicks around it
 function symbolKey(faces, slots, onPick, pop, aria){
   const b = document.createElement("button");
@@ -221,12 +262,17 @@ const SPACE = [" ", ":", ":", ":", ":"];
 const spaceKey = () => symbolKey(["␣", ":", "", "", ""], SPACE, v => v === " " ? insertChar(" ") : insertPunct(":"),
   v => textPop(v === " " ? "␣" : ":"), "Space: tap for a space, flick in any direction for a colon");
 const LAYER_ICON = ["toki", "soweli", "poki"];
-// a layer key shows that layer's icon word; while its layer is open it turns into the way back to layer 1
+// a layer key shows that layer's icon word; while its layer is open it turns into the way back to layer 1.
+// Tap: the layer is open for one word (light key). Flick: it stays open (solid key) until the key is tapped.
 function layerKey(n){
-  const active = mode === n, w = LAYER_ICON[active ? 0 : n];
+  const open = mode === n, locked = open && layerLock, w = LAYER_ICON[open ? 0 : n];
   const face = labelSp ? `<span class="lk">${g(w)}</span>` : `<span class="lw">${w}</span>`;
-  return sideKey(face, "", one(1), () => go(active ? 0 : n), () => wordPop(w), active,
-    active ? "Back to layer 1" : `Layer ${n + 1}`);
+  const b = sideKey(face, "", ["tap", "keep", "keep", "keep", "keep"],
+    v => v === "tap" ? go(open ? 0 : n) : (locked || go(n, true)),
+    v => v === "tap" ? wordPop(w) : textPop(locked ? "—" : "Keep open"), open,
+    open ? "Back to layer 1" : `Layer ${n + 1} for one word; flick to keep it open`);
+  if (open && !locked) b.classList.add("soft");
+  return b;
 }
 const one = v => [v,"","","",""];
 // a line-drawn globe in the text color, instead of the colored 🌐 emoji
@@ -236,7 +282,7 @@ const GLOBE = `<svg class="globe" viewBox="0 0 24 24" aria-hidden="true" fill="n
 function build(){
   kb.innerHTML = "";
   kb.classList.toggle("sp-mode", labelSp && mode < 3);
-  $("layername").innerHTML = `<b>${NAMES[mode]}</b>`;
+  $("layername").innerHTML = `<b>${NAMES[mode]}</b>` + (mode === 1 || mode === 2 ? (layerLock ? " · stays open" : " · one word") : "");
   const keys = mode < 3 ? LAYOUT[mode] : ABC;
   const left = [
     mode === 3 ? sideKey(labelSp ? `<span class="lk">${g("toki")}</span>` : `<span class="lw">toki</span>`, "", one(1), () => go(0), () => wordPop("toki"), true, "Back to layer 1") : sideKey("ABC", "", one(1), () => go(3), null, false, "Letters"),
@@ -247,7 +293,8 @@ function build(){
   ];
   const right = [
     sideKey("⌫", "", ["c","w","w","w","w"], (v) => v === "c" ? delChar() : delWord(),
-      (v) => textPop(v === "c" ? "1 letter" : "1 word"), false, "Delete: tap for a letter, flick for a word"),
+      (v) => textPop(v === "c" ? "1 letter" : "1 word"), false, "Delete: tap for a letter, flick for a word, hold to keep deleting",
+      { repeat: delChar }),
     spaceKey(),
     puncKey(),
     sideKey("⏎", "", one(1), () => put(txt.value.replace(/ +$/,"") + "\n")),
@@ -263,8 +310,8 @@ function build(){
     b.setAttribute("aria-label", (k.g || "empty") + ": " + slots.filter(Boolean).join(", "));
     b.innerHTML = `<span class="c">${slots[0] ? lab(slots[0]) : ""}</span>` +
       ["pl","pu","pr","pd"].map((d, j) => slots[j+1] ? `<span class="d ${d}">${lab(slots[j+1])}</span>` : "").join("");
-    if (word) attachFlick(b, slots, insertWord, wordPop);
-    else attachFlick(b, slots, v => v === SHIFT ? toggleCase() : insertChar(v), v => textPop(v === SHIFT ? "Aa" : v));
+    if (word) attachFlick(b, slots, v => { insertWord(v); if (mode !== 0 && !layerLock) go(0); }, wordPop, { guide: true });
+    else attachFlick(b, slots, v => v === SHIFT ? toggleCase() : insertLetter(v), v => textPop(v === SHIFT ? "Aa" : v), { guide: true });
     kb.appendChild(b);
     if (i % 3 === 2) kb.appendChild(right[(i - 2) / 3]);
   });
@@ -272,7 +319,7 @@ function build(){
 }
 
 function renderLegend(){
-  if (mode === 3){ $("legend").innerHTML = `<h2>ABC · Letters</h2><div class="lg-row"><span class="gn">How to use</span><span class="ws">Type names letter by letter. No space is added automatically. The letters follow the sronhatie layout of Thumb-Key: the nine most common letters are taps, and the others are flicks toward the middle key. Tap a/A to switch the case of the last letter.</span></div>`; return; }
+  if (mode === 3){ $("legend").innerHTML = `<h2>ABC · Letters</h2><div class="lg-row"><span class="gn">How to use</span><span class="ws">Type names letter by letter. No space is added automatically. The letters follow the sronhatie layout of Thumb-Key: the nine most common letters are taps, and the others are flicks toward the middle key. A letter at the start of a word is capitalized for you, since names are. Tap a/A to switch the case of the last letter.</span></div>`; return; }
   const keys = LAYOUT[mode].filter(k => k.g);
   let h = `<h2>${NAMES[mode]}</h2>`;
   for (const k of keys){
@@ -285,6 +332,7 @@ function press(on, off){ on.setAttribute("aria-pressed","true"); off.setAttribut
 $("lab-sp").onclick = () => { labelSp = true; press($("lab-sp"), $("lab-lat")); build(); };
 $("lab-lat").onclick = () => { labelSp = false; press($("lab-lat"), $("lab-sp")); build(); };
 $("clear").onclick = () => { put(""); };
+$("snd").onclick = () => { sound = !sound; $("snd").setAttribute("aria-pressed", sound); $("snd").textContent = sound ? "Sound on" : "Sound off"; };
 $("copy").onclick = () => {
   const fail = () => { txt.select(); $("status").textContent = "Text selected. Long-press to copy it."; };
   try { navigator.clipboard.writeText(txt.value).then(() => { $("status").textContent = "Copied"; }, fail); } catch (e) { fail(); }
