@@ -26,22 +26,25 @@ body { font-size: 15px; line-height: 1.5; }
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
   display: grid; gap: 12px; }
 h1 { font-size: 1.15rem; margin: 0; }
-.lede { margin: 2px 0 0; color: var(--muted); font-size: 0.82rem; }
 /* the intro starts folded so the keyboard fits on a phone screen without scrolling */
-.intro summary { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; cursor: pointer; list-style: none; }
-.intro summary::-webkit-details-marker { display: none; }
-.intro .more { font-size: 0.78rem; color: var(--accent); white-space: nowrap; }
-.intro .more::after { content: " ▸"; }
-.intro[open] .more::after { content: " ▾"; }
+.top { display: flex; align-items: baseline; gap: 14px; }
+.top h1 { margin-right: auto; }
+.link { font: inherit; font-size: 0.8rem; color: var(--accent); background: none; border: 0; padding: 2px 0; cursor: pointer; white-space: nowrap; }
+#info::after { content: " ▸"; }
+#info[aria-expanded="true"]::after { content: " ▾"; }
+.lede { display: grid; gap: 4px; color: var(--muted); font-size: 0.82rem; }
+.lede[hidden] { display: none; }
+.lede p { margin: 0; }
+.seg .sp { font-family: var(--sp); font-size: 1rem; line-height: 1; }
 .out { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: grid; gap: 6px; }
 .sp-line { font-family: var(--sp); font-size: 1.7rem; line-height: 1.3; min-height: 2.2rem; overflow-wrap: anywhere; }
 textarea { font: inherit; font-size: 1rem; width: 100%; box-sizing: border-box; min-height: 3.2rem; resize: vertical; border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; background: var(--bg); color: var(--fg); }
-.row-btn { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.row-btn { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
 button { font: inherit; cursor: pointer; }
-.btn { font-size: 0.85rem; padding: 5px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--fg); }
+.btn { font-size: 0.85rem; padding: 5px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--fg); }
 .btn.primary { background: var(--accent); color: var(--hot-fg); border-color: var(--accent); }
 .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); }
-.seg button { font-size: 0.8rem; padding: 5px 9px; border: 0; background: transparent; color: var(--fg); }
+.seg button { font-size: 0.8rem; padding: 5px 7px; border: 0; background: transparent; color: var(--fg); }
 .seg button[aria-pressed="true"] { background: var(--accent); color: var(--hot-fg); }
 button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .status { font-size: 0.78rem; color: var(--muted); min-height: 1.2em; }
@@ -104,23 +107,23 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
 </style>
 
 <div class="wrap" id="app">
-  <header>
-    <details class="intro">
-      <summary><h1>nasin Luka Pona</h1><span class="more">How it works</span></summary>
-      <p class="lede">Tap a key for the word in the middle, or flick left, up, right or down for the words around it. Related words share a key, and most words sit in the direction their sitelen pona glyph points. Try it with your finger on a phone.</p>
-    </details>
+  <header class="top">
+    <h1>nasin Luka Pona</h1>
+    <button class="link" id="info" aria-expanded="false" aria-controls="lede" data-t="info"></button>
+    <button class="link" id="lang"></button>
   </header>
+  <div class="lede" id="lede" hidden data-t="lede"></div>
 
   <section class="out" aria-label="Output">
     <div class="sp-line" id="spline" aria-label="sitelen pona preview"></div>
     <textarea id="txt" aria-label="Latin text output" spellcheck="false" autocapitalize="off" autocomplete="off">mi wile toki pona. </textarea>
     <div class="row-btn">
-      <button class="btn primary" id="copy">Copy</button>
-      <button class="btn" id="clear">Clear</button>
+      <button class="btn primary" id="copy" data-t="copy"></button>
+      <button class="btn" id="clear" data-t="clear"></button>
       <button class="btn icon" id="snd" aria-pressed="true" aria-label="Key sound" title="Key sound"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="on" d="M16.5 8.5a5 5 0 0 1 0 7"/><path class="off" d="M16 9l5 6M21 9l-5 6"/></svg></button>
       <div class="seg" role="group" aria-label="Key labels">
-        <button id="lab-sp" aria-pressed="true">Glyphs</button>
-        <button id="lab-lat" aria-pressed="false">Latin</button>
+        <button id="lab-sp" aria-pressed="true" aria-label="sitelen pona"></button>
+        <button id="lab-lat" aria-pressed="false" aria-label="sitelen Lasina">abc</button>
       </div>
     </div>
     <div class="status" id="status" aria-live="polite"></div>
@@ -131,12 +134,7 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
 
   <section class="legend" id="legend"></section>
 
-  <section class="notes">
-    <div>Directions follow the glyphs. mi points down, sina points up and ona points left, so you flick that way. pona is the tap on its key and ike (∩) is down; lili and suli sit on opposite sides. In the Position key, insa (dot inside) is the tap, sinpin (dot in front) is right, monsi (dot behind) is left, anpa is down. tan (where you come from) is left and tawa (where you go) is right.</div>
-    <div>Right column: ⌫ tap deletes a letter (hold to keep deleting), a flick in any direction deletes a word · space (flick it in any direction for “:”) · punctuation (tap “.”, ← “,”, ↑ “?”, ↓ “!”) · ⏎ return. Left column: ABC letters · layer 2 (soweli) · layer 3 (poki) · next keyboard. Tap layer 2 or 3 to type one word from it, then you are back on layer 1; flick the key instead to keep the layer open. While layer 2 or 3 is open, its key shows toki and takes you back to layer 1.</div>
-    <div>Layer 1 holds 57 words that cover about 87% of the words in real toki pona text. Empty slots on layers 2 and 3 are left for new words (nimisin) or your own picks.</div>
-    <div>Sources: words and glyph codepoints from <a href="https://github.com/lipu-linku/sona" target="_blank" rel="noopener">lipu Linku</a> (CC BY-SA 4.0) · word frequency from <a href="https://sona.pona.la/wiki/Word_frequency" target="_blank" rel="noopener">sona pona wiki</a> (ilo Muni) · font <a href="https://github.com/ETBCOR/nasin-nanpa" target="_blank" rel="noopener">nasin nanpa</a> by jan Itan (MIT License).</div>
-  </section>
+  <section class="notes" data-t="notes"></section>
 </div>
 
 <script>
@@ -151,13 +149,83 @@ const ABC = [
   {g:"", w:["a/A","-","~","*","%"]}, {g:"", w:["'","\"","(",")",""]}, {g:"", w:["@","#","/","&","_"]},
 ];
 const SHIFT = "a/A";
-const NAMES = ["Layer 1 · Common words", "Layer 2 · Nature, body, people", "Layer 3 · Position, objects", "ABC · Letters"];
-const DIRNAME = ["tap","←","↑","→","↓"];
 const PUNCT = [".", ",", "?", "", "!"];  // [tap, ←, ↑, →, ↓]; → is left empty at the screen edge, the colon is on the space key
 let mode = 0, labelSp = true;   // mode 0,1,2 = word layers, 3 = ABC
 let layerLock = false;           // false: layer 2 or 3 goes back to layer 1 after one word
 let sound = true, actx = null;
 const $ = id => document.getElementById(id);
+// Page text: toki pona first, English on request (the Language link at the top)
+const LINKS = {
+  linku: `<a href="https://github.com/lipu-linku/sona" target="_blank" rel="noopener">lipu Linku</a>`,
+  wiki: `<a href="https://sona.pona.la/wiki/Word_frequency" target="_blank" rel="noopener">sona pona wiki</a>`,
+  font: `<a href="https://github.com/ETBCOR/nasin-nanpa" target="_blank" rel="noopener">nasin nanpa</a>`,
+};
+const T = {
+  tp: {
+    other: "English",
+    info: "nasin kepeken",
+    lede: `<p>o luka e nena la, nimi insa li kama. o tawa e luka tawa ← ↑ → ↓ la, nimi poka li kama.</p>
+      <p>nimi pi kulupu sama li lon nena sama. sitelen pona li lukin tawa poka seme la, nimi li lon poka ni.</p>
+      <p>nena pi lipu nanpa tu anu nanpa tu wan: o luka e ona la, sina ken pana e nimi wan taso tan lipu ni. o tawa e luka lon ona la, lipu ni li awen.</p>
+      <p>nena ⌫: o luka e ona la, sitelen wan li weka. o tawa e luka lon ona la, nimi wan li weka.</p>
+      <p>o kepeken luka sina lon ilo toki.</p>`,
+    copy: "pali sama", clear: "weka",
+    copied: "pali sama li pini.",
+    selected: "sitelen li jo e kule. o luka e ona lon tenpo suli, o pali sama.",
+    globe: "lon ilo, nena ni li pana e ilo sitelen ante.",
+    names: ["lipu nanpa wan · nimi pi kepeken mute", "lipu nanpa tu · ma, sijelo, jan", "lipu nanpa tu wan · lon, poki, ijo", "ABC · sitelen Lasina"],
+    oneWord: " · nimi wan taso", staysOpen: " · awen",
+    tap: "insa", letter: "sitelen wan", word: "nimi wan", keep: "o awen",
+    groups: {
+      "Pronouns": "jan", "Grammar": "nasin toki", "Prepositions": "nimi poka", "Negation & logic": "ala, anu",
+      "Language": "toki", "Mind & will": "lawa, wile", "Actions": "pali", "Qualities": "pona, ike",
+      "Numbers": "nanpa", "Time & place": "tenpo, ma", "Things & life": "ijo, moku", "Interjections": "nimi pilin",
+      "Animals": "soweli", "Plants & food": "kasi, moku", "Sky & light": "sewi, suno", "Matter": "telo, kiwen",
+      "Colors": "kule", "Body": "sijelo", "People": "kulupu jan", "Feelings": "pilin",
+      "Surfaces & holes": "selo, lupa", "Sound": "kalama", "Life & death": "lon, moli", "Heat": "seli, lete",
+      "Position": "lon", "Box, open & close": "poki, open, pini", "Conflict": "utala", "Objects": "ijo",
+      "Shapes": "sike, leko", "Money": "mani", "New & extra": "sin", "Books": "lipu pu",
+    },
+    abcHow: "nasin",
+    abc: "o sitelen e nimi jan kepeken sitelen Lasina. lupa li kama ala. nasin sitelen ni li tan ilo Thumb-Key (sronhatie): sitelen 9 pi kepeken mute li lon insa nena. sitelen nanpa wan pi nimi li kama suli, tan ni: nimi jan li open kepeken sitelen suli. nena a/A li ante e suli pi sitelen pini.",
+    notes: `<div>sitelen li lukin tawa poka seme la, nimi li lon poka ni. «mi» li lon ↓, «sina» li lon ↑, «ona» li lon ←. «pona» li lon insa nena, «ike» (∩) li lon ↓. «lili» en «suli» li lon poka ante. lon nena pi nimi lon la, «insa» li lon insa, «sinpin» li lon →, «monsi» li lon ←, «anpa» li lon ↓. «tan» li lon ←, «tawa» li lon →.</div>
+      <div>nena lon poka →: ⌫ (o luka: sitelen wan li weka. o awen luka: sitelen mute li weka. o tawa: nimi wan li weka) · ␣ (o tawa: «:») · . (← «,» ↑ «?» ↓ «!») · ⏎. nena lon poka ←: ABC · lipu nanpa tu (soweli) · lipu nanpa tu wan (poki) · ilo sitelen ante. lipu nanpa tu anu tu wan li open la, nena ona li jo e sitelen «toki», li tawa lipu nanpa wan.</div>
+      <div>lipu nanpa wan li jo e nimi 57. lon lipu pi toki pona, nimi 87 pi nimi 100 li tan ona. lipu nanpa tu en lipu nanpa tu wan la, ma pi jo ala li tawa nimi sin anu nimi pi wile sina.</div>
+      <div>nimi en nanpa sitelen li tan ${LINKS.linku} (CC BY-SA 4.0) · nanpa pi kepeken nimi li tan ${LINKS.wiki} (ilo Muni) · sitelen ${LINKS.font} li tan jan Itan (MIT License).</div>`,
+  },
+  en: {
+    other: "toki pona",
+    info: "How it works",
+    lede: `<p>Tap a key for the word in the middle, or flick left, up, right or down for the words around it.</p>
+      <p>Related words share a key, and most words sit in the direction their sitelen pona glyph points.</p>
+      <p>Layer 2 and 3 keys: tap to type one word from that layer, then you are back on layer 1. Flick to keep the layer open.</p>
+      <p>⌫: tap to delete a letter, flick in any direction to delete a word.</p>
+      <p>Try it with your finger on a phone.</p>`,
+    copy: "Copy", clear: "Clear",
+    copied: "Copied",
+    selected: "Text selected. Long-press to copy it.",
+    globe: "In the app, this key switches to your next keyboard.",
+    names: ["Layer 1 · Common words", "Layer 2 · Nature, body, people", "Layer 3 · Position, objects", "ABC · Letters"],
+    oneWord: " · one word", staysOpen: " · stays open",
+    tap: "tap", letter: "1 letter", word: "1 word", keep: "Keep open",
+    groups: {},
+    abcHow: "How to use",
+    abc: "Type names letter by letter. No space is added automatically. The letters follow the sronhatie layout of Thumb-Key: the nine most common letters are taps, and the others are flicks toward the middle key. A letter at the start of a word is capitalized for you, since names are. Tap a/A to switch the case of the last letter.",
+    notes: `<div>Directions follow the glyphs. mi points down, sina points up and ona points left, so you flick that way. pona is the tap on its key and ike (∩) is down; lili and suli sit on opposite sides. In the Position key, insa (dot inside) is the tap, sinpin (dot in front) is right, monsi (dot behind) is left, anpa is down. tan (where you come from) is left and tawa (where you go) is right.</div>
+      <div>Right column: ⌫ tap deletes a letter (hold to keep deleting), a flick in any direction deletes a word · space (flick it in any direction for “:”) · punctuation (tap “.”, ← “,”, ↑ “?”, ↓ “!”) · ⏎ return. Left column: ABC letters · layer 2 (soweli) · layer 3 (poki) · next keyboard. Tap layer 2 or 3 to type one word from it, then you are back on layer 1; flick the key instead to keep the layer open. While layer 2 or 3 is open, its key shows toki and takes you back to layer 1.</div>
+      <div>Layer 1 holds 57 words that cover about 87% of the words in real toki pona text. Empty slots on layers 2 and 3 are left for new words (nimisin) or your own picks.</div>
+      <div>Sources: words and glyph codepoints from ${LINKS.linku} (CC BY-SA 4.0) · word frequency from ${LINKS.wiki} (ilo Muni) · font ${LINKS.font} by jan Itan (MIT License).</div>`,
+  },
+};
+let lang = "tp";
+try { if (localStorage.getItem("lang") === "en") lang = "en"; } catch (e) {}
+const t = k => T[lang][k];
+function applyLang(){
+  document.documentElement.lang = lang === "tp" ? "tok" : "en";
+  document.querySelectorAll("[data-t]").forEach(el => { el.innerHTML = t(el.dataset.t); });
+  $("lang").textContent = t("other");
+  $("status").textContent = "";
+}
 const txt = $("txt"), kb = $("kb");
 const g = w => UCSUR[w] ? String.fromCodePoint(parseInt(UCSUR[w].slice(2),16)) : "";
 
@@ -273,7 +341,7 @@ function layerKey(n){
   const face = labelSp ? `<span class="lk">${g(w)}</span>` : `<span class="lw">${w}</span>`;
   const b = sideKey(face, "", ["tap", "keep", "keep", "keep", "keep"],
     v => v === "tap" ? go(open ? 0 : n) : (locked || go(n, true)),
-    v => v === "tap" ? wordPop(w) : textPop(locked ? "—" : "Keep open"), open,
+    v => v === "tap" ? wordPop(w) : textPop(locked ? "—" : t("keep")), open,
     open ? "Back to layer 1" : `Layer ${n + 1} for one word; flick to keep it open`);
   if (open && !locked) b.classList.add("soft");
   return b;
@@ -286,18 +354,18 @@ const GLOBE = `<svg class="globe" viewBox="0 0 24 24" aria-hidden="true" fill="n
 function build(){
   kb.innerHTML = "";
   kb.classList.toggle("sp-mode", labelSp && mode < 3);
-  $("layername").innerHTML = `<b>${NAMES[mode]}</b>` + (mode === 1 || mode === 2 ? (layerLock ? " · stays open" : " · one word") : "");
+  $("layername").innerHTML = `<b>${t("names")[mode]}</b>` + (mode === 1 || mode === 2 ? t(layerLock ? "staysOpen" : "oneWord") : "");
   const keys = mode < 3 ? LAYOUT[mode] : ABC;
   const left = [
     mode === 3 ? sideKey(labelSp ? `<span class="lk">${g("toki")}</span>` : `<span class="lw">toki</span>`, "", one(1), () => go(0), () => wordPop("toki"), true, "Back to layer 1") : sideKey("ABC", "", one(1), () => go(3), null, false, "Letters"),
     layerKey(1),
     layerKey(2),
-    sideKey(GLOBE, "", one(1), () => { $("status").textContent = "In the app, this key switches to your next keyboard."; },
+    sideKey(GLOBE, "", one(1), () => { $("status").textContent = t("globe"); },
       null, false, "Next keyboard"),
   ];
   const right = [
     sideKey("⌫", "", ["c","w","w","w","w"], (v) => v === "c" ? delChar() : delWord(),
-      (v) => textPop(v === "c" ? "1 letter" : "1 word"), false, "Delete: tap for a letter, flick for a word, hold to keep deleting",
+      (v) => textPop(t(v === "c" ? "letter" : "word")), false, "Delete: tap for a letter, flick for a word, hold to keep deleting",
       { repeat: delChar }),
     spaceKey(),
     puncKey(),
@@ -323,11 +391,12 @@ function build(){
 }
 
 function renderLegend(){
-  if (mode === 3){ $("legend").innerHTML = `<h2>ABC · Letters</h2><div class="lg-row"><span class="gn">How to use</span><span class="ws">Type names letter by letter. No space is added automatically. The letters follow the sronhatie layout of Thumb-Key: the nine most common letters are taps, and the others are flicks toward the middle key. A letter at the start of a word is capitalized for you, since names are. Tap a/A to switch the case of the last letter.</span></div>`; holdLegendHeight(); return; }
+  if (mode === 3){ $("legend").innerHTML = `<h2>${t("names")[3]}</h2><div class="lg-row"><span class="gn">${t("abcHow")}</span><span class="ws">${t("abc")}</span></div>`; holdLegendHeight(); return; }
   const keys = LAYOUT[mode].filter(k => k.g);
-  let h = `<h2>${NAMES[mode]}</h2>`;
+  const dirs = [t("tap"), "←", "↑", "→", "↓"];
+  let h = `<h2>${t("names")[mode]}</h2>`;
   for (const k of keys){
-    h += `<div class="lg-row"><span class="gn">${k.g}</span><span class="ws">${k.w.map((w,i)=> w ? `<span class="dn">${DIRNAME[i]}</span>${i===0?`<b>${w}</b>`:w}` : "").filter(Boolean).join("　")}</span></div>`;
+    h += `<div class="lg-row"><span class="gn">${t("groups")[k.g] || k.g}</span><span class="ws">${k.w.map((w,i)=> w ? `<span class="dn">${dirs[i]}</span>${i===0?`<b>${w}</b>`:w}` : "").filter(Boolean).join("　")}</span></div>`;
   }
   $("legend").innerHTML = h;
   holdLegendHeight();
@@ -347,11 +416,19 @@ $("lab-lat").onclick = () => { labelSp = false; press($("lab-lat"), $("lab-sp"))
 $("clear").onclick = () => { put(""); };
 $("snd").onclick = () => { sound = !sound; $("snd").setAttribute("aria-pressed", sound); };
 $("copy").onclick = () => {
-  const fail = () => { txt.select(); $("status").textContent = "Text selected. Long-press to copy it."; };
-  try { navigator.clipboard.writeText(txt.value).then(() => { $("status").textContent = "Copied"; }, fail); } catch (e) { fail(); }
+  const fail = () => { txt.select(); $("status").textContent = t("selected"); };
+  try { navigator.clipboard.writeText(txt.value).then(() => { $("status").textContent = t("copied"); }, fail); } catch (e) { fail(); }
 };
+$("info").onclick = () => { const open = $("lede").hidden; $("lede").hidden = !open; $("info").setAttribute("aria-expanded", open); };
+$("lang").onclick = () => {
+  lang = lang === "tp" ? "en" : "tp";
+  try { localStorage.setItem("lang", lang); } catch (e) {}
+  legendMin = 0; $("legend").style.minHeight = "";
+  applyLang(); build();
+};
+$("lab-sp").innerHTML = `<span class="sp">${g("sitelen")}${g("pona")}</span>`;
 txt.addEventListener("input", refresh);
-build(); refresh();
+applyLang(); build(); refresh();
 </script>
 
 </html>
