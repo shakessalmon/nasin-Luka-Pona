@@ -68,6 +68,7 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
 .key.side .lk { display: block; font-family: var(--sp); font-weight: 400; font-size: 1.7rem; line-height: 1.1; }
 .key.side .lw { display: block; font-size: 0.85rem; }
 .key.side.punc .c { font-size: 1.2rem; }
+.key .globe { width: 1.35rem; height: 1.35rem; display: block; margin: 0 auto; }
 .key.side.punc .d { font-size: 0.85rem; font-family: var(--sans); }
 .key.side small { display: block; font-size: 0.6rem; color: var(--muted); font-weight: 400; }
 .key.pressed { background: var(--accent-soft); }
@@ -228,6 +229,9 @@ function layerKey(n){
     active ? "Back to layer 1" : `Layer ${n + 1}`);
 }
 const one = v => [v,"","","",""];
+// a line-drawn globe in the text color, instead of the colored 🌐 emoji
+const GLOBE = `<svg class="globe" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">
+  <circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 7.5h14M5 16.5h14"/></svg>`;
 
 function build(){
   kb.innerHTML = "";
@@ -238,7 +242,8 @@ function build(){
     mode === 3 ? sideKey(labelSp ? `<span class="lk">${g("toki")}</span>` : `<span class="lw">toki</span>`, "", one(1), () => go(0), () => wordPop("toki"), true, "Back to layer 1") : sideKey("ABC", "", one(1), () => go(3), null, false, "Letters"),
     layerKey(1),
     layerKey(2),
-    sideKey("🌐", "", one(1), () => { $("status").textContent = "In the app, this key switches to your next keyboard."; }),
+    sideKey(GLOBE, "", one(1), () => { $("status").textContent = "In the app, this key switches to your next keyboard."; },
+      null, false, "Next keyboard"),
   ];
   const right = [
     sideKey("⌫", "", ["c","w","w","w","w"], (v) => v === "c" ? delChar() : delWord(),

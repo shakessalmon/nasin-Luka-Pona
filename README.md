@@ -33,7 +33,7 @@ Side columns (like the iOS Japanese keyboard):
 The keyboard reads `data/layout.json` and `data/words.json` and uses `fonts/nasin-nanpa-subset.otf` for the glyphs, so it always matches the data files.
 It does not need Full Access.
 
-On the keyboard, tap 🌐 for the next keyboard, or flick it to switch the keys between glyphs and Latin letters.
+On the keyboard, tap the globe key for the next keyboard, or flick it to switch the keys between glyphs and Latin letters.
 Hold ⌫ to keep deleting letters.
 
 ### Install on your iPhone with a free Apple ID

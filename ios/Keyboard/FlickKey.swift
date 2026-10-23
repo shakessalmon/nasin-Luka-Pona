@@ -19,6 +19,7 @@ final class FlickKey: UIView {
     var onRepeat: (() -> Void)?
 
     private let mainLabel = UILabel()
+    private let iconView = UIImageView()
     private let edgeLabels = (0..<4).map { _ in UILabel() }
     private let baseColor: UIColor
     private let pressedColor: UIColor
@@ -48,6 +49,16 @@ final class FlickKey: UIView {
             addSubview(label)
         }
         for label in edgeLabels { label.textColor = edgeColor }
+        iconView.tintColor = textColor
+        iconView.contentMode = .center
+        iconView.isUserInteractionEnabled = false
+        addSubview(iconView)
+    }
+
+    /// Shows a monochrome SF Symbol in place of the main label.
+    func setIcon(_ systemName: String, pointSize: CGFloat) {
+        mainLabel.text = nil
+        iconView.image = UIImage(systemName: systemName, withConfiguration: UIImage.SymbolConfiguration(pointSize: pointSize))
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -73,6 +84,7 @@ final class FlickKey: UIView {
         let sideW = hasEdges ? w * 0.24 : 2
         let mainDy = mainLabel.font.pointSize * glyphNudge, edgeDy = edgeLabels[0].font.pointSize * glyphNudge
         mainLabel.frame = CGRect(x: sideW, y: mainDy, width: w - sideW * 2, height: h)
+        iconView.frame = bounds
         edgeLabels[0].frame = CGRect(x: 2, y: edgeDy, width: sideW - 2, height: h)
         edgeLabels[1].frame = CGRect(x: 4, y: 1 + edgeDy, width: w - 8, height: edgeH)
         edgeLabels[2].frame = CGRect(x: w - sideW, y: edgeDy, width: sideW - 2, height: h)

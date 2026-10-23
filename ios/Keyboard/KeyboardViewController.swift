@@ -171,9 +171,9 @@ final class KeyboardViewController: UIInputViewController {
 
     /// Tap: next keyboard. Flick: switch the key faces between glyphs and Latin letters.
     private func globeKey() -> FlickKey {
-        sideKey("🌐", preview: { [weak self] i in
+        let key = sideKey("", preview: { [weak self] i in
             guard let self else { return nil }
-            let label = i == 0 ? "🌐" : (self.showGlyphs ? "Latin" : "Glyphs")
+            let label = i == 0 ? "Next keyboard" : (self.showGlyphs ? "Latin" : "Glyphs")
             return (nil, label)
         }, pick: { [weak self] i in
             guard let self else { return }
@@ -184,6 +184,9 @@ final class KeyboardViewController: UIInputViewController {
                 self.rebuild()
             }
         })
+        // the system's monochrome globe, not the colored 🌐 emoji
+        key.setIcon("globe", pointSize: size(20))
+        return key
     }
 
     private func deleteKey() -> FlickKey {

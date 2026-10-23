@@ -10,7 +10,7 @@ struct ContentView: View {
             Form {
                 Section("Turn on the keyboard") {
                     Text("1. Open Settings › General › Keyboard › Keyboards › Add New Keyboard… and pick nasin Luka Pona. Full Access is not needed.")
-                    Text("2. In any text field, hold 🌐 and choose nasin Luka Pona.")
+                    Text("2. In any text field, hold \(Image(systemName: "globe")) and choose nasin Luka Pona.")
                     Button("Open Settings") {
                         if let url = URL(string: UIApplication.openSettingsURLString) {
                             UIApplication.shared.open(url)
@@ -26,7 +26,7 @@ struct ContentView: View {
                 Section("How to type") {
                     Text("Tap a key for the word in the middle, or flick left, up, right or down for the words around it. A space is added after each word.")
                     Text("Most words sit in the direction their glyph points: mi ↓, sina ↑, ona ←, ike ↓, lili ← / suli →.")
-                    Text("Left column: ABC letters · layer 2 · layer 3 · 🌐. Tap 🌐 for the next keyboard; flick it to switch the keys between glyphs and Latin letters.")
+                    Text("Left column: ABC letters · layer 2 · layer 3 · \(Image(systemName: "globe")). Tap \(Image(systemName: "globe")) for the next keyboard; flick it to switch the keys between glyphs and Latin letters.")
                     Text("Right column: ⌫ (tap for a letter, flick for a word, hold to repeat) · space (flick for :) · punctuation (tap . ← , ↑ ? ↓ !) · return.")
                 }
             }
