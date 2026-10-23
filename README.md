@@ -70,6 +70,7 @@ scripts/                  scripts used to build words.json, layout.json and the 
 
 ## Credits and licenses
 
+- Made by jan Sake ([shakessalmon](https://github.com/shakessalmon)) and ilo Claude.
 - Code: MIT License (see `LICENSE`).
 - Word data, categories, glosses and glyph codepoints: [lipu Linku / sona](https://github.com/lipu-linku/sona), CC BY-SA 4.0. `data/words.json` is a derivative and is shared under CC BY-SA 4.0.
 - Word frequency: [sona pona wiki – Word frequency](https://sona.pona.la/wiki/Word_frequency) (ilo Muni counts, September 2024).
