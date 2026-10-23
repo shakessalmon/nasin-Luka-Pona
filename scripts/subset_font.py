@@ -14,7 +14,7 @@ for out in sys.argv[2:]:
     font = TTFont(sys.argv[1])
     opts = subset.Options()
     opts.flavor = "woff2" if out.endswith(".woff2") else None
-    opts.name_IDs = ["*"]
+    opts.layout_features = []   # one glyph per codepoint: no alternates or ligatures pulled in
     sub = subset.Subsetter(opts)
     sub.populate(unicodes=cps)
     sub.subset(font)

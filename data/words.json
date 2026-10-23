@@ -1308,5 +1308,65 @@
   "ucsur": "U+F1987",
   "en": "medical item or practice e.g. prescriptions, meditation, exercise, bandages, therapy",
   "ja": "薬、医療"
+ },
+ {
+  "word": "lanpan",
+  "rank": null,
+  "count": null,
+  "category": "uncommon",
+  "book": "ku suli",
+  "ucsur": "U+F1985",
+  "en": "take, seize, steal",
+  "ja": "取る、摑み取る、盗む、捕らえる、手に入れる"
+ },
+ {
+  "word": "epiku",
+  "rank": null,
+  "count": null,
+  "category": "uncommon",
+  "book": "ku suli",
+  "ucsur": "U+F1983",
+  "en": "epic, cool, awesome, amazing",
+  "ja": "すごい、すてき、かっこいい、すばらしい"
+ },
+ {
+  "word": "oko",
+  "rank": null,
+  "count": null,
+  "category": "uncommon",
+  "book": "ku suli",
+  "ucsur": "U+F197A",
+  "en": "see, look, view, examine, read, watch; visual; eye, seeing organ; (preverb) try to",
+  "ja": "見る、眺める、調べる、読む; 視覚の; 目; (前動詞)〜してみる"
+ },
+ {
+  "word": "meso",
+  "rank": null,
+  "count": null,
+  "category": "uncommon",
+  "book": "ku suli",
+  "ucsur": "U+F1982",
+  "en": "midpoint, medium, mediocre; neither one not the other, neither fully is nor isn't",
+  "ja": "中間点、中間、中ぐらいの、並みの; どっちつかず、中途半端"
+ },
+ {
+  "word": "jasima",
+  "rank": null,
+  "count": null,
+  "category": "uncommon",
+  "book": "ku suli",
+  "ucsur": "U+F197F",
+  "en": "reflect, echo; mirror, duplicate",
+  "ja": "反射する、反響する、映す、相対する、対極的な"
+ },
+ {
+  "word": "kokosila",
+  "rank": null,
+  "count": null,
+  "category": "obscure",
+  "book": "ku suli",
+  "ucsur": "U+F1984",
+  "en": "to speak a non-Toki Pona language in an environment where Toki Pona is more appropriate",
+  "ja": "トキポナ的な場でトキポナ以外の言語を話す、ワニる"
  }
 ]

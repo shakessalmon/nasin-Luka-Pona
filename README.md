@@ -17,10 +17,10 @@ One tap or one flick types one whole word.
 | Layer | Contents | Words |
 |---|---|---|
 | 1 | The most frequent words — about 87% of real toki pona text | 57 |
-| 2 | Animals, plants, sky, matter, colors, body, people, feelings | 47 |
-| 3 | Position, boxes & opening/closing, conflict, objects, shapes, money | 27 |
+| 2 | Animals, plants, sky, matter, colors, body, people, feelings, senses | 48 |
+| 3 | Position, boxes & opening/closing, conflict, objects, shapes, trade, middle & mirror, words about toki pona | 32 |
 
-All 131 *core* and *common* words from lipu Linku are included. Empty slots are left for nimisin or personal picks.
+All 131 *core* and *common* words from lipu Linku are included, plus the other six words of ku suli: epiku, jasima, kokosila, lanpan, meso and oko. Empty slots are left for nimisin or personal picks.
 The full layout is in [`data/layout.json`](data/layout.json): each key lists `[tap, left, up, right, down]`.
 
 Side columns (like the iOS Japanese keyboard):
@@ -61,7 +61,7 @@ With a free Apple ID the app stops working after 7 days. Press Run in Xcode agai
 
 ```
 web/index.html            web prototype (single file, font embedded)
-data/words.json           131 words: frequency rank, Linku category, UCSUR codepoint, English/Japanese glosses
+data/words.json           137 words: frequency rank (none yet for the six added ku suli words), Linku category, UCSUR codepoint, English/Japanese glosses
 data/layout.json          the three layers
 fonts/                    subset of the nasin nanpa font (.woff2 for the web, .otf for iOS) + its license
 ios/                      Xcode project: container app (App/) and keyboard extension (Keyboard/)

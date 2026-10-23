@@ -12,7 +12,8 @@ for fn in os.listdir(os.path.join(root, "glyphs/metadata")):
 rows = []
 for fn in sorted(os.listdir(md)):
     w = load(os.path.join(md, fn))
-    if w["usage_category"] not in ("core", "common"): continue
+    # core and common words, plus the rest of ku suli (epiku, jasima, kokosila, lanpan, meso, oko)
+    if w["usage_category"] not in ("core", "common") and w.get("book") != "ku suli": continue
     u = w.get("usage", {})
     latest = u[max(u)] if u else None
     g = glyphs.get(w.get("primary_glyph_id", ""), {})

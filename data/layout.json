@@ -213,12 +213,12 @@
    ]
   },
   {
-   "g": "Sound",
+   "g": "Senses",
    "w": [
     "kalama",
     "kute",
     "",
-    "",
+    "oko",
     ""
    ]
   },
@@ -295,11 +295,11 @@
    ]
   },
   {
-   "g": "Money",
+   "g": "Trade",
    "w": [
     "esun",
     "mani",
-    "",
+    "lanpan",
     "",
     ""
    ]
@@ -309,28 +309,28 @@
    "w": [
     "sin",
     "namako",
-    "",
+    "epiku",
     "",
     ""
    ]
   },
   {
-   "g": "Books",
+   "g": "About toki pona",
    "w": [
     "pu",
     "ku",
-    "",
+    "kokosila",
     "",
     ""
    ]
   },
   {
-   "g": "",
+   "g": "Middle & mirror",
    "w": [
+    "meso",
     "",
     "",
-    "",
-    "",
+    "jasima",
     ""
    ]
   },
