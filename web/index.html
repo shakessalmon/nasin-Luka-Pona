@@ -87,10 +87,11 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
 .btn.icon { padding: 4px 8px; line-height: 0; }
 .btn.icon svg { width: 1.2rem; height: 1.2rem; }
 #snd[aria-pressed="true"] .off, #snd[aria-pressed="false"] .on { display: none; }
-.layer-tag { font-size: 0.78rem; color: var(--muted); display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+/* one line on every layer, so switching layers never moves the keyboard */
+.layer-tag { font-size: 0.78rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .layer-tag b { color: var(--accent); }
 
-.legend { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.legend { box-sizing: border-box; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
 .legend h2 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0; padding: 10px 12px 6px; font-weight: 600; }
 .lg-row { display: grid; grid-template-columns: 6.5rem minmax(0,1fr); gap: 8px; padding: 6px 12px; border-top: 1px solid var(--line); font-size: 0.82rem; }
 .lg-row .gn { font-weight: 600; }
@@ -125,7 +126,7 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
     <div class="status" id="status" aria-live="polite"></div>
   </section>
 
-  <div class="layer-tag"><span id="layername"></span><span>Switch layers in the left column</span></div>
+  <div class="layer-tag" id="layername"></div>
   <div class="kb" id="kb" aria-label="Keyboard"></div>
 
   <section class="legend" id="legend"></section>
@@ -322,14 +323,23 @@ function build(){
 }
 
 function renderLegend(){
-  if (mode === 3){ $("legend").innerHTML = `<h2>ABC · Letters</h2><div class="lg-row"><span class="gn">How to use</span><span class="ws">Type names letter by letter. No space is added automatically. The letters follow the sronhatie layout of Thumb-Key: the nine most common letters are taps, and the others are flicks toward the middle key. A letter at the start of a word is capitalized for you, since names are. Tap a/A to switch the case of the last letter.</span></div>`; return; }
+  if (mode === 3){ $("legend").innerHTML = `<h2>ABC · Letters</h2><div class="lg-row"><span class="gn">How to use</span><span class="ws">Type names letter by letter. No space is added automatically. The letters follow the sronhatie layout of Thumb-Key: the nine most common letters are taps, and the others are flicks toward the middle key. A letter at the start of a word is capitalized for you, since names are. Tap a/A to switch the case of the last letter.</span></div>`; holdLegendHeight(); return; }
   const keys = LAYOUT[mode].filter(k => k.g);
   let h = `<h2>${NAMES[mode]}</h2>`;
   for (const k of keys){
     h += `<div class="lg-row"><span class="gn">${k.g}</span><span class="ws">${k.w.map((w,i)=> w ? `<span class="dn">${DIRNAME[i]}</span>${i===0?`<b>${w}</b>`:w}` : "").filter(Boolean).join("　")}</span></div>`;
   }
   $("legend").innerHTML = h;
+  holdLegendHeight();
 }
+// the legend never gets shorter, so the page does not shrink and scroll the keyboard when you switch layers
+let legendMin = 0;
+function holdLegendHeight(){
+  const el = $("legend");
+  legendMin = Math.max(legendMin, el.offsetHeight);
+  el.style.minHeight = legendMin + "px";
+}
+addEventListener("resize", () => { legendMin = 0; $("legend").style.minHeight = ""; holdLegendHeight(); });
 
 function press(on, off){ on.setAttribute("aria-pressed","true"); off.setAttribute("aria-pressed","false"); }
 $("lab-sp").onclick = () => { labelSp = true; press($("lab-sp"), $("lab-lat")); build(); };
