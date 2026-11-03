@@ -2,3 +2,7 @@
 build/
 DerivedData/
 xcuserdata/
+.gradle/
+local.properties
+.idea/
+*.iml

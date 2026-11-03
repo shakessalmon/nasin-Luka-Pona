@@ -50,11 +50,25 @@ Hold ⌫ to keep deleting letters. Keys click when Keyboard Clicks is on in Sett
 
 With a free Apple ID the app stops working after 7 days. Press Run in Xcode again to reinstall it.
 
+## Android keyboard
+
+`android/` is an Android Studio project with the same keyboard (Android 9 or later).
+It reads the same `data/` files and font, and it has no internet permission.
+Unlike iOS, it can be installed without a store or a developer account:
+
+1. On GitHub, open **Actions › Android build**, pick the latest green run, and download **nasin-luka-pona-apk** under Artifacts (you need to be signed in).
+2. Unzip it and open `app-debug.apk` on the phone. Allow your browser or file app to install unknown apps when asked.
+3. Open the app, tap **Open keyboard settings**, turn on nasin Luka Pona, then **Choose keyboard**.
+
+The debug build is signed with the fixed key in `android/app/debug.keystore`, so a newer build installs over an older one.
+TalkBack support (reading the keys aloud) is not done yet.
+
 ## Roadmap
 
 - [x] Word list and frequency ranking
 - [x] Web prototype
 - [x] iOS keyboard extension (Swift) — first version, needs testing on a device
+- [x] Android keyboard (Kotlin) — first version, needs testing on a device
 - [ ] Optional output of sitelen pona (UCSUR) instead of Latin text
 
 ## Repository layout
@@ -65,6 +79,7 @@ data/words.json           137 words: frequency rank (none yet for the six added 
 data/layout.json          the three layers
 fonts/                    subset of the nasin nanpa font (.woff2 for the web, .otf for iOS) + its license
 ios/                      Xcode project: container app (App/) and keyboard extension (Keyboard/)
+android/                  Android Studio project: setup screen and keyboard service (app/src/main/java/…)
 scripts/                  scripts used to build words.json, layout.json, the font subsets and the icon (the nasin glyph)
 ```
 
