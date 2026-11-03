@@ -23,3 +23,6 @@ jobs:
           ls -la "$appex"
           test -f "$appex/layout.json" && test -f "$appex/words.json" && test -f "$appex/nasin-nanpa-subset.otf"
           plutil -p "$appex/Info.plist"
+          app=ios/build/Debug-iphonesimulator/NasinLukaPona.app
+          test -f "$app/Assets.car"
+          plutil -p "$app/Info.plist" | grep -A4 CFBundleIcons

@@ -65,7 +65,7 @@ data/words.json           137 words: frequency rank (none yet for the six added 
 data/layout.json          the three layers
 fonts/                    subset of the nasin nanpa font (.woff2 for the web, .otf for iOS) + its license
 ios/                      Xcode project: container app (App/) and keyboard extension (Keyboard/)
-scripts/                  scripts used to build words.json, layout.json and the font subsets
+scripts/                  scripts used to build words.json, layout.json, the font subsets and the icon (the nasin glyph)
 ```
 
 ## Credits and licenses

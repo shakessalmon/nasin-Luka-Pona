@@ -16,6 +16,7 @@
 		EE5C20712DFDDDE538F34BE6 /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = 701D26D75069B820E482E8B2 /* words.json */; };
 		A3089664EEB746B14118F39B /* nasin-nanpa-subset.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4781BF43E0C8B6C5799D44B /* nasin-nanpa-subset.otf */; };
 		5A24FAE98E315C505C628B23 /* NasinLukaPonaKeyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 62B885C3007FC48DE49417EA /* NasinLukaPonaKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DB249DB9D0FF833647E29581 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F9973165E2B0FD4A3AAC566 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		09E347C7E9D5979FA2F9A4FC /* layout.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = layout.json; path = ../data/layout.json; sourceTree = SOURCE_ROOT; };
 		701D26D75069B820E482E8B2 /* words.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = words.json; path = ../data/words.json; sourceTree = SOURCE_ROOT; };
 		F4781BF43E0C8B6C5799D44B /* nasin-nanpa-subset.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "nasin-nanpa-subset.otf"; path = "../fonts/nasin-nanpa-subset.otf"; sourceTree = SOURCE_ROOT; };
+		6F9973165E2B0FD4A3AAC566 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 			children = (
 				A469275069264982CBD9BACD /* NasinLukaPonaApp.swift */,
 				458A9B7AC51363CB00FBD741 /* ContentView.swift */,
+				6F9973165E2B0FD4A3AAC566 /* Assets.xcassets */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB249DB9D0FF833647E29581 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +320,7 @@
 		73B2450642F83ADEBD7F7ACC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
@@ -341,6 +346,7 @@
 		D63DD76AAD31260480F92708 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
